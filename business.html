@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What's That Game? for Business — Events & Venues</title>
+  <meta name="description" content="Run better game nights at your pub, school, or hostel. What's That Game? gives event organisers a curated library of social games for any crowd." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0812;
+      --bg-card: #120f1e;
+      --bg-card-hover: #1a1630;
+      --border: rgba(255,255,255,0.07);
+      --primary: #9333ea;
+      --accent: #c084fc;
+      --text: #f0f0f7;
+      --muted: #8885a4;
+      --gradient: linear-gradient(135deg, #7c3aed 0%, #c084fc 100%);
+      --glow: 0 0 40px rgba(147, 51, 234, 0.35);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 8, 18, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 34px; height: 34px;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .nav-tag {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background: rgba(147,51,234,0.12);
+      border: 1px solid rgba(147,51,234,0.3);
+      border-radius: 6px;
+      padding: 3px 8px;
+    }
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--gradient);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 80px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(124,58,237,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(147,51,234,0.12);
+      border: 1px solid rgba(147,51,234,0.35);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
+    }
+    .hero-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(38px, 7vw, 72px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      max-width: 820px;
+    }
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 64px;
+    }
+    .btn-primary {
+      background: var(--gradient);
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      padding: 16px 32px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--glow);
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 0 50px rgba(147,51,234,0.5); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 16px 32px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: rgba(147,51,234,0.5); background: rgba(147,51,234,0.06); }
+
+    /* ── VENUE LOGOS / SOCIAL PROOF ── */
+    .proof-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .proof-bar span { opacity: 0.5; }
+    .proof-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 64px;
+    }
+
+    /* ── VENUE CARDS ── */
+    .venue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .venue-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .venue-card:hover {
+      border-color: rgba(147,51,234,0.35);
+      transform: translateY(-4px);
+    }
+    .venue-header {
+      padding: 32px 32px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .venue-emoji {
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .venue-type {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .venue-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .venue-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .venue-body {
+      padding: 24px 32px 32px;
+    }
+    .venue-use-cases {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .venue-use-cases li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .check {
+      width: 20px; height: 20px;
+      background: rgba(147,51,234,0.15);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 11px;
+    }
+
+    /* ── HOW IT WORKS FOR BUSINESS ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+    }
+    .step-num {
+      width: 40px; height: 40px;
+      background: var(--gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    .step-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── FEATURES ROW ── */
+    .features-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .feature-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .feature-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: rgba(147,51,234,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .feature-text .ft { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .feature-text .fd { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ── PRICING / TIERS ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      align-items: start;
+    }
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px;
+      position: relative;
+      transition: border-color 0.25s;
+    }
+    .pricing-card.featured {
+      border-color: rgba(147,51,234,0.5);
+      background: var(--bg-card-hover);
+    }
+    .pricing-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .pricing-card:hover { border-color: rgba(147,51,234,0.4); }
+    .pricing-tier {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .pricing-name {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .pricing-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      min-height: 56px;
+    }
+    .pricing-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+    }
+    .pricing-price span {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .pricing-note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .pricing-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .pricing-features li .check { flex-shrink: 0; }
+    .pricing-btn {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 100px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .pricing-btn.outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .pricing-btn.outline:hover { border-color: rgba(147,51,234,0.5); background: rgba(147,51,234,0.06); }
+    .pricing-btn.filled {
+      background: var(--gradient);
+      color: #fff;
+      box-shadow: var(--glow);
+    }
+    .pricing-btn.filled:hover { opacity: 0.9; box-shadow: 0 0 50px rgba(147,51,234,0.5); }
+
+    /* ── CTA ── */
+    .cta-section {
+      margin: 0 24px 100px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: clamp(48px, 8vw, 80px) 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-title { font-size: clamp(26px, 4vw, 42px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .cta-sub { font-size: 17px; color: var(--muted); max-width: 460px; margin: 0 auto 40px; line-height: 1.65; }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto 16px;
+    }
+    .form-row { display: flex; gap: 12px; }
+    .form-input {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-input::placeholder { color: var(--muted); }
+    .form-input:focus { border-color: rgba(147,51,234,0.55); }
+    .form-select {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--muted);
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+      cursor: pointer;
+      width: 100%;
+      appearance: none;
+    }
+    .form-select:focus { border-color: rgba(147,51,234,0.55); color: var(--text); }
+    .form-select option { background: #1a1630; color: var(--text); }
+    .submit-btn {
+      background: var(--gradient);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: var(--glow);
+    }
+    .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+    .success-msg {
+      display: none;
+      background: rgba(45,140,92,0.15);
+      border: 1px solid rgba(45,140,92,0.4);
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #4ade80;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+    }
+    .cta-note { font-size: 13px; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 13px; color: var(--muted); width: 100%; text-align: center; }
+
+    @media (max-width: 600px) {
+      .form-row { flex-direction: column; }
+      footer { justify-content: center; text-align: center; }
+      .footer-links { justify-content: center; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .nav-left { gap: 12px; }
+      .nav-tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🎮</span>
+        What's That Game?
+      </a>
+      <span class="nav-tag">For Business</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="index.html" class="nav-link">Consumer App</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">🏢 What's That Game? for Business</div>
+
+    <h1 class="hero-title">
+      The game night tool your<br />
+      <span class="gradient-text">venue actually needs.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Give your guests something to talk about. What's That Game? helps pubs, schools, and hostels run brilliant social events — no equipment, no prep, no awkward silences.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a demo</a>
+      <a href="#venues" class="btn-secondary">See how it works</a>
+    </div>
+
+    <div class="proof-bar">
+      <span>Built for</span>
+      <div class="proof-pill">🍺 Pubs & Bars</div>
+      <div class="proof-pill">🎓 Schools & Universities</div>
+      <div class="proof-pill">🛏️ Hostels & Hotels</div>
+      <div class="proof-pill">🎪 Event Organisers</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VENUE SECTIONS -->
+  <section class="section" id="venues">
+    <p class="section-label">Who it's for</p>
+    <h2 class="section-title">Made for the places people come together</h2>
+    <p class="section-sub">Whether you're running a quiz night, freshers week, or a hostel social, we've got the games.</p>
+
+    <div class="venue-grid">
+
+      <div class="venue-card">
+        <div class="venue-header">
+          <span class="venue-emoji">🍺</span>
+          <div class="venue-type">Pubs & Bars</div>
+          <h3 class="venue-title">Turn a quiet Tuesday into game night</h3>
+          <p class="venue-desc">Keep customers in their seats longer and coming back weekly. A curated game library means your staff can host a proper game night — no trivia machine required.</p>
+        </div>
+        <div class="venue-body">
+          <ul class="venue-use-cases">
+            <li><span class="check">✓</span> Weekly game night events with rotating themes</li>
+            <li><span class="check">✓</span> Drinking game collections for groups and birthday parties</li>
+            <li><span class="check">✓</span> No equipment needed — just phones and people</li>
+            <li><span class="check">✓</span> Instant ice-breakers for strangers at the bar</li>
+            <li><span class="check">✓</span> QR code at the table — guests browse and pick their own game</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="venue-card">
+        <div class="venue-header">
+          <span class="venue-emoji">🎓</span>
+          <div class="venue-type">Schools & Universities</div>
+          <h3 class="venue-title">Ice-breakers that people actually enjoy</h3>
+          <p class="venue-desc">From freshers week to classroom warm-ups, What's That Game? gives organisers a ready-made toolkit for getting groups talking — without the cringe.</p>
+        </div>
+        <div class="venue-body">
+          <ul class="venue-use-cases">
+            <li><span class="check">✓</span> Freshers week and welcome events</li>
+            <li><span class="check">✓</span> Society and club social nights</li>
+            <li><span class="check">✓</span> Classroom ice-breakers filtered by age rating</li>
+            <li><span class="check">✓</span> Games filtered by player count and duration</li>
+            <li><span class="check">✓</span> Safe, age-appropriate game collections for under-18s</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="venue-card">
+        <div class="venue-header">
+          <span class="venue-emoji">🛏️</span>
+          <div class="venue-type">Hostels & Hotels</div>
+          <h3 class="venue-title">Make your common room worth hanging out in</h3>
+          <p class="venue-desc">Solo travellers want to meet people but don't know how. Game nights in your common room are the easiest, cheapest way to build community — and get five-star reviews.</p>
+        </div>
+        <div class="venue-body">
+          <ul class="venue-use-cases">
+            <li><span class="check">✓</span> Weekly common room game nights</li>
+            <li><span class="check">✓</span> Self-serve: guests scan a QR and start playing</li>
+            <li><span class="check">✓</span> Multi-language game options for international guests</li>
+            <li><span class="check">✓</span> Games that work with 3 people or 30</li>
+            <li><span class="check">✓</span> No-equipment games so nothing gets lost or damaged</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">Up and running in minutes</h2>
+    <p class="section-sub">No installation, no hardware, no training required.</p>
+
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Sign up your venue</div>
+        <p class="step-desc">Create a business account and tell us about your venue — what type it is, your typical crowd size, and what kind of events you run.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Get your custom game pack</div>
+        <p class="step-desc">We curate a collection of games suited to your venue and guests — filtered by age, player count, equipment, and vibe. You can also browse and add your own.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Share with your guests</div>
+        <p class="step-desc">Print a QR code for your tables, share a link on your social channels, or hand your staff a tablet. Guests browse, pick a game, and start playing immediately.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Watch engagement grow</div>
+        <p class="step-desc">See which games your guests love most, track event attendance, and keep updating your collection as new games get added to the platform.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FEATURES -->
+  <section class="section">
+    <p class="section-label">Business features</p>
+    <h2 class="section-title">Everything an event organiser needs</h2>
+    <p class="section-sub">Built for people who run events, not just play games.</p>
+
+    <div class="features-row">
+      <div class="feature-item">
+        <div class="feature-icon">📋</div>
+        <div class="feature-text">
+          <div class="ft">Curated Game Packs</div>
+          <div class="fd">Pre-built collections for specific events — pub quiz warm-ups, freshers week, hostel socials, and more.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔗</div>
+        <div class="feature-text">
+          <div class="ft">QR Code Access</div>
+          <div class="fd">Generate a QR code for your venue. Guests scan it and land directly on your curated game list — no app download needed.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-text">
+          <div class="ft">Smart Filters</div>
+          <div class="fd">Filter by player count, duration, age rating, and equipment. Always find the right game for the right moment.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🎲</div>
+        <div class="feature-text">
+          <div class="ft">Random Game Picker</div>
+          <div class="fd">Can't agree on what to play? Hit the dice button and let the app decide. Works great for large groups.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-text">
+          <div class="ft">Age-Safe Collections</div>
+          <div class="fd">For schools and under-18 events, filter to age-appropriate games only. Every game has a verified age rating.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📱</div>
+        <div class="feature-text">
+          <div class="ft">No App Required for Guests</div>
+          <div class="fd">Guests access games through a web link — no download, no sign-up, no friction. Just play.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PRICING -->
+  <section class="section">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Simple, transparent pricing</h2>
+    <p class="section-sub">Whether you're one venue or a chain, there's a plan that works for you.</p>
+
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-name">Single Venue</div>
+        <p class="pricing-desc">Perfect for independent pubs, hostels, or schools running occasional events.</p>
+        <div class="pricing-price">Free <span>for now</span></div>
+        <p class="pricing-note">Early access — free while we're in beta</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Access to the full game library</li>
+          <li><span class="check">✓</span> 1 custom game pack</li>
+          <li><span class="check">✓</span> QR code for your venue</li>
+          <li><span class="check">✓</span> Unlimited guest access</li>
+          <li><span class="check">✓</span> Email support</li>
+        </ul>
+        <a href="#contact" class="pricing-btn outline">Get started free</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-tier">Pro</div>
+        <div class="pricing-name">Regular Events</div>
+        <p class="pricing-desc">For venues running weekly game nights or schools with regular social programming.</p>
+        <div class="pricing-price">Coming soon</div>
+        <p class="pricing-note">Notify me when Pro launches</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Everything in Starter</li>
+          <li><span class="check">✓</span> Unlimited custom game packs</li>
+          <li><span class="check">✓</span> Branded experience for guests</li>
+          <li><span class="check">✓</span> Event planning templates</li>
+          <li><span class="check">✓</span> Analytics dashboard</li>
+          <li><span class="check">✓</span> Priority support</li>
+        </ul>
+        <a href="#contact" class="pricing-btn filled">Join the waitlist</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-name">Chains & Groups</div>
+        <p class="pricing-desc">For pub groups, hostel chains, and multi-site education providers.</p>
+        <div class="pricing-price">Talk to us</div>
+        <p class="pricing-note">Custom pricing for your needs</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Everything in Pro</li>
+          <li><span class="check">✓</span> Multi-venue management</li>
+          <li><span class="check">✓</span> Custom game submissions</li>
+          <li><span class="check">✓</span> Dedicated account manager</li>
+          <li><span class="check">✓</span> SLA and custom contracts</li>
+          <li><span class="check">✓</span> White-label options</li>
+        </ul>
+        <a href="#contact" class="pricing-btn outline">Contact sales</a>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT FORM -->
+  <section class="section" id="contact">
+    <div class="cta-section">
+      <h2 class="cta-title">Ready to run better events?</h2>
+      <p class="cta-sub">Tell us about your venue and we'll reach out to get you set up.</p>
+
+      <form class="contact-form" id="contact-form" onsubmit="handleContact(event)">
+        <div class="form-row">
+          <input type="text" class="form-input" placeholder="Your name" required />
+          <input type="email" class="form-input" placeholder="Work email" required />
+        </div>
+        <input type="text" class="form-input" placeholder="Venue or organisation name" required />
+        <select class="form-select" required>
+          <option value="" disabled selected>What type of venue?</option>
+          <option value="pub">Pub / Bar</option>
+          <option value="school">School / College</option>
+          <option value="university">University / Students' Union</option>
+          <option value="hostel">Hostel / Hotel</option>
+          <option value="events">Event Organiser</option>
+          <option value="other">Other</option>
+        </select>
+        <input type="text" class="form-input" placeholder="Tell us about your events (optional)" />
+        <button type="submit" class="submit-btn" id="contact-btn">Send enquiry</button>
+      </form>
+      <div class="success-msg" id="contact-success">
+        🎉 Thanks! We'll be in touch within 24 hours.
+      </div>
+      <p class="cta-note" style="margin-top:16px;">Or email us directly at <a href="mailto:hello@whatsthatgame.info" style="color:var(--accent);text-decoration:none;">hello@whatsthatgame.info</a></p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="divider"></div>
+  <footer>
+    <div class="footer-logo">
+      <span>🎮</span>
+      What's That Game?
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Consumer App</a>
+      <a href="mailto:hello@whatsthatgame.info">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 What's That Game? All rights reserved.</p>
+  </footer>
+
+  <script>
+    function handleContact(event) {
+      event.preventDefault();
+      const btn = document.getElementById('contact-btn');
+      const successEl = document.getElementById('contact-success');
+      const form = document.getElementById('contact-form');
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      // Wire to a real form service here (Formspree, Supabase, etc.)
+      setTimeout(() => {
+        form.style.display = 'none';
+        successEl.style.display = 'block';
+      }, 900);
+    }
+  </script>
+</body>
+</html>

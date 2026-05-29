@@ -10,21 +10,21 @@
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0d111f;
-      --bg-card: #141928;
-      --bg-card-hover: #1a2035;
+      --bg: #0a0812;
+      --bg-card: #120f1e;
+      --bg-card-hover: #1a1630;
       --border: rgba(255,255,255,0.07);
-      --primary: #e8522a;
-      --accent: #f5a623;
-      --text: #f0f2f7;
-      --muted: #8892a4;
-      --gradient: linear-gradient(135deg, #e8522a 0%, #f5a623 100%);
-      --glow: 0 0 40px rgba(232, 82, 42, 0.3);
+      --primary: #9333ea;
+      --accent: #c084fc;
+      --text: #f0f0f7;
+      --muted: #8885a4;
+      --gradient: linear-gradient(135deg, #7c3aed 0%, #c084fc 100%);
+      --glow: 0 0 40px rgba(147, 51, 234, 0.35);
     }
 
     html { scroll-behavior: smooth; }
@@ -109,7 +109,7 @@
       top: 0; left: 50%; transform: translateX(-50%);
       width: 800px;
       height: 600px;
-      background: radial-gradient(ellipse at center, rgba(232,82,42,0.12) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(124,58,237,0.15) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -117,19 +117,19 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(232,82,42,0.12);
-      border: 1px solid rgba(232,82,42,0.3);
+      background: rgba(147,51,234,0.12);
+      border: 1px solid rgba(147,51,234,0.35);
       border-radius: 100px;
       padding: 8px 16px;
       font-size: 13px;
       font-weight: 500;
-      color: #f5a623;
+      color: #c084fc;
       margin-bottom: 32px;
       letter-spacing: 0.02em;
     }
     .badge-dot {
       width: 7px; height: 7px;
-      background: #f5a623;
+      background: #c084fc;
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
@@ -139,6 +139,7 @@
     }
 
     .hero-title {
+      font-family: 'Archivo Black', sans-serif;
       font-size: clamp(42px, 8vw, 80px);
       font-weight: 800;
       line-height: 1.05;
@@ -182,7 +183,7 @@
       transition: border-color 0.2s;
     }
     .signup-input::placeholder { color: var(--muted); }
-    .signup-input:focus { border-color: rgba(232,82,42,0.5); }
+    .signup-input:focus { border-color: rgba(147,51,234,0.55); }
 
     .signup-btn {
       background: var(--gradient);
@@ -198,7 +199,7 @@
       transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
       box-shadow: var(--glow);
     }
-    .signup-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 0 50px rgba(232,82,42,0.4); }
+    .signup-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 0 50px rgba(147,51,234,0.5); }
     .signup-btn:active { transform: translateY(0); }
     .signup-btn:disabled { opacity: 0.6; cursor: default; }
 
@@ -289,14 +290,14 @@
       transition: border-color 0.25s, transform 0.25s, background 0.25s;
     }
     .feature-card:hover {
-      border-color: rgba(232,82,42,0.3);
+      border-color: rgba(147,51,234,0.35);
       transform: translateY(-4px);
       background: var(--bg-card-hover);
     }
     .feature-icon {
       width: 52px; height: 52px;
       border-radius: 14px;
-      background: rgba(232,82,42,0.12);
+      background: rgba(147,51,234,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -393,7 +394,7 @@
       position: absolute;
       top: -100px; left: 50%; transform: translateX(-50%);
       width: 600px; height: 400px;
-      background: radial-gradient(ellipse, rgba(232,82,42,0.1) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%);
       pointer-events: none;
     }
     .cta-title {
@@ -483,7 +484,10 @@
       <span class="logo-icon">🎮</span>
       What's That Game?
     </a>
-    <a href="#waitlist" class="nav-cta">Get Early Access</a>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="business.html" style="color:var(--muted);font-size:14px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">For Business</a>
+      <a href="#waitlist" class="nav-cta">Get Early Access</a>
+    </div>
   </nav>
 
   <!-- HERO -->
