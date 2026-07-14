@@ -61,12 +61,16 @@ already used in `index.html`).
 
 - Two fields: "New password", "Confirm password" (both `type="password"`).
 - Submit button, styled like `.signup-btn`.
-- On page load: read `token` from `location.search`. If absent, skip
-  straight to invalid-link state (never show the form).
+- On page load: read `token` via `new URLSearchParams(location.search).get('token')`.
+  If absent, skip straight to invalid-link state (never show the form).
 
 **Client-side validation on submit** (before any network call):
 - Both fields non-empty
-- New password ≥ 8 characters
+- New password between 8 and 128 characters (matches backend
+  `MIN_PASSWORD_LENGTH` / `MAX_PASSWORD_LENGTH` in `src/core/security.py`,
+  enforced on `ResetPasswordRequest.new_password`). No complexity rule
+  (no special-char/uppercase/number requirement) — backend doesn't enforce
+  one, so client doesn't either.
 - Passwords match
 
 Validation failures show an inline error message under the form; no network
@@ -111,13 +115,22 @@ Content-Type: application/json
   (mirrors `handleSignup`'s existing `btn.disabled` / label-swap pattern in
   `index.html`).
 - 200 → success state.
-- 400 → invalid-link state.
-- Anything else / network failure → network-error handling above, button
-  re-enabled.
+- 400 → invalid-link state (token invalid/expired — the only thing the
+  backend returns 400 for on this endpoint).
+- 422 or any other status / network failure → network-error handling
+  above, button re-enabled. In practice 422 (backend field validation,
+  e.g. password length) shouldn't occur since client-side validation
+  already enforces the same 8–128 range, but it's handled distinctly from
+  400 rather than lumped into "invalid link" if it ever does.
+- `Content-Type: application/json` header is required on the request.
 
 The API base URL is hardcoded as a `const` at the top of the page's
 `<script>` — no environment variable indirection, since this repo has no
 build step to inject one.
+
+**CORS:** confirmed 2026-07-14 that `whatsthatgame.co.uk` is already present
+in the backend's `CORS_ORIGINS` on Railway — no backend config change
+needed before this page can call the API.
 
 ## Testing
 
