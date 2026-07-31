@@ -393,7 +393,7 @@ Partner With Us
         btn.disabled = true;
         btn.textContent = 'Signing up…';
 
-        fetch('/api/subscribe', {
+        fetch('https://api.whatsthatgame.co.uk/mailing-list/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
