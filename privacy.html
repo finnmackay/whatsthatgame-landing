@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Privacy Policy | What's That Game?</title>
+<link rel="icon" type="image/png" href="assets/favicon.png"/>
+<meta name="description" content="Privacy Policy for the What's That Game app: what data we collect, why, who we share it with, and your rights." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#630ed4",
+                    "primary-container": "#7c3aed",
+                    "on-primary": "#ffffff",
+                    "on-primary-container": "#ede0ff",
+                    "secondary-container": "#e9def5",
+                    "on-secondary-container": "#4a4456",
+                    "tertiary-container": "#fff3d6",
+                    "on-tertiary-container": "#5c4300",
+                    "surface": "#fcf8ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f6f2ff",
+                    "surface-container": "#efebff",
+                    "surface-container-high": "#e9e5ff",
+                    "surface-container-highest": "#e3dfff",
+                    "on-surface": "#181445",
+                    "on-surface-variant": "#4a4455",
+                    "outline": "#7b7487",
+                    "outline-variant": "#ccc3d8"
+                },
+                fontFamily: {
+                    sans: ["Plus Jakarta Sans", "sans-serif"]
+                }
+            }
+        }
+    }
+</script>
+<style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .prose-section p { line-height: 1.75; }
+    .prose-section h3 { font-weight: 800; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+    .prose-section ul { list-style: disc; padding-left: 1.25rem; }
+    .prose-section li { margin-bottom: 0.35rem; line-height: 1.7; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f6f2ff; }
+    ::-webkit-scrollbar-thumb { background: #ccc3d8; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #7b7487; }
+</style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- NAV -->
+<header class="w-full sticky top-0 z-50 bg-surface border-b-2 border-outline-variant shadow-sm">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<a href="index.html" class="text-2xl font-black text-primary tracking-tight">What's That Game?</a>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="index.html">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="business.html">Business Portal</a>
+<a class="text-primary font-bold border-b-2 border-primary" href="privacy.html">Privacy Policy</a>
+</nav>
+<div class="hidden md:flex items-center gap-4">
+<a href="business.html#contact" class="bg-primary text-on-primary font-bold px-5 py-2 rounded-lg shadow-lg hover:scale-105 active:scale-95 transition-all">Get in Touch</a>
+</div>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" class="md:hidden flex items-center justify-center w-10 h-10 text-primary" id="menu-toggle">
+<span class="material-symbols-outlined" id="menu-toggle-icon">menu</span>
+</button>
+</div>
+<nav class="hidden md:hidden flex-col border-t-2 border-outline-variant bg-surface" id="mobile-menu">
+<a class="px-6 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="index.html">Home</a>
+<a class="px-6 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="business.html">Business Portal</a>
+<a class="px-6 py-3 text-primary font-bold bg-surface-container-low" href="privacy.html">Privacy Policy</a>
+<a class="mx-6 my-2 px-6 py-3 bg-primary text-on-primary font-bold text-center rounded-lg" href="business.html#contact">Get in Touch</a>
+</nav>
+</header>
+
+<main class="w-full max-w-[900px] mx-auto px-6 py-12">
+
+<!-- Hero -->
+<div class="mb-10">
+<h1 class="text-[32px] md:text-[44px] font-[800] leading-tight text-on-surface mb-2">Privacy Policy</h1>
+<p class="text-on-surface-variant font-medium">Last updated: 31 July 2026 · Applies to the What's That Game mobile app (iOS and Android) and its backend API.</p>
+</div>
+
+<!-- Table of Contents -->
+<div class="mb-14">
+<div class="bg-surface-container-low border-2 border-primary/20 rounded-xl p-4 md:p-6">
+<button class="flex items-center justify-between w-full md:hidden text-primary font-bold" id="toc-toggle">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined">list</span>
+Table of Contents
+</span>
+<span class="material-symbols-outlined transition-transform" id="toc-chevron">expand_more</span>
+</button>
+<nav class="hidden md:block mt-4 md:mt-0" id="toc-content">
+<h2 class="hidden md:block text-on-surface-variant mb-4 uppercase tracking-widest text-[12px] font-bold">Quick Navigation</h2>
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-8 text-[14px]">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#who-we-are"><span class="font-bold text-primary/40">01</span> Who we are</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#summary"><span class="font-bold text-primary/40">02</span> Summary</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#data-collect"><span class="font-bold text-primary/40">03</span> Data we collect</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#how-we-use"><span class="font-bold text-primary/40">04</span> How we use your data</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#ai-features"><span class="font-bold text-primary/40">05</span> AI features</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#sharing"><span class="font-bold text-primary/40">06</span> Third parties</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#transfers"><span class="font-bold text-primary/40">07</span> International transfers</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#retention"><span class="font-bold text-primary/40">08</span> How long we keep data</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#rights"><span class="font-bold text-primary/40">09</span> Your rights</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#children"><span class="font-bold text-primary/40">10</span> Children</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#security"><span class="font-bold text-primary/40">11</span> Security</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#changes"><span class="font-bold text-primary/40">12</span> Changes</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#contact"><span class="font-bold text-primary/40">13</span> Contact</a></li>
+</ul>
+</nav>
+</div>
+</div>
+
+<article class="prose-section space-y-16">
+
+<section id="who-we-are">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">corporate_fare</span></div>
+<h2 class="text-2xl font-extrabold">1. Who we are</h2>
+</div>
+<p>What's That Game ("we", "us", "our") is an independent project run by its founding team. We are <strong>not yet incorporated as a legal entity</strong> — the project is currently operated privately by its founders. If and when we incorporate, this policy will be updated with the company details.</p>
+<p>For any privacy question or request, contact us at <a class="text-primary underline" href="mailto:whatsthatgameteam@gmail.com">whatsthatgameteam@gmail.com</a>.</p>
+<p>The project founders act as joint data controllers for the purposes of the UK GDPR / EU GDPR.</p>
+</section>
+
+<section id="summary">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">summarize</span></div>
+<h2 class="text-2xl font-extrabold">2. Summary</h2>
+</div>
+<div class="bg-surface-container rounded-xl p-6 border-l-4 border-primary">
+<p>What's That Game lets you create, store, search and discover party/board games. To do that we store an account for you, the games you contribute (including photos), and your activity — favourites, comments, alias suggestions, and achievements. We use a small number of third-party providers (Google, Apple, OpenAI, Amplitude, Railway, Cloudflare, Resend, Expo) to sign you in, power semantic search and AI text suggestions, moderate uploaded content, measure how the app is used, host the service, store photos, send account emails, and deliver push notifications.</p>
+<p class="font-bold text-primary mt-3">We do not sell your personal data.</p>
+</div>
+</section>
+
+<section id="data-collect">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">database</span></div>
+<h2 class="text-2xl font-extrabold">3. Data we collect</h2>
+</div>
+
+<h3>3.1 Account data (you give us this when you register)</h3>
+<div class="overflow-x-auto border-2 border-outline-variant rounded-xl">
+<table class="w-full text-left border-collapse text-sm">
+<thead class="bg-surface-container-high">
+<tr><th class="p-3 border-b-2 border-outline-variant font-bold">Data</th><th class="p-3 border-b-2 border-outline-variant font-bold">Required?</th><th class="p-3 border-b-2 border-outline-variant font-bold">Why</th></tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr><td class="p-3 font-bold text-primary">First name</td><td class="p-3">Yes</td><td class="p-3">Display, personalisation</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3 font-bold text-primary">Last name</td><td class="p-3">Yes</td><td class="p-3">Display, personalisation</td></tr>
+<tr><td class="p-3 font-bold text-primary">Username</td><td class="p-3">Yes</td><td class="p-3">Public identity on the platform</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3 font-bold text-primary">Email address</td><td class="p-3">Yes</td><td class="p-3">Login, account recovery, service notices</td></tr>
+<tr><td class="p-3 font-bold text-primary">Password</td><td class="p-3">Email/password sign-up only</td><td class="p-3">Authentication — stored only as a bcrypt hash, never in plain text</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3 font-bold text-primary">Date of birth</td><td class="p-3">Yes</td><td class="p-3">Age-appropriate content (age ratings, adult-content gating)</td></tr>
+<tr><td class="p-3 font-bold text-primary">Country of origin</td><td class="p-3">Yes</td><td class="p-3">Personalisation / regional context (2-letter ISO code)</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3 font-bold text-primary">Avatar image</td><td class="p-3">Optional</td><td class="p-3">Profile picture (see §3.4)</td></tr>
+</tbody>
+</table>
+</div>
+<p class="mt-3">We also automatically record an account <code>role</code>, an active/inactive flag, and account <code>created</code>/<code>last updated</code> timestamps.</p>
+
+<h3>3.2 Sign-in provider data (Google / Apple)</h3>
+<p>You can create or access your account using a third-party identity provider. We do <strong>not</strong> receive your Google or Apple password.</p>
+<p><strong>Sign in with Google</strong> — under the <code>openid email profile</code> scopes, Google gives us your email address (and whether it's verified), Google account ID (<code>sub</code>), first/last name, and profile picture URL.</p>
+<p><strong>Sign in with Apple</strong> — Apple gives us your Apple account identifier (<code>sub</code>), an email address (which may be a private relay address of the form <code>something@privaterelay.appleid.com</code> — we treat these the same as a real email for all account purposes), and your first/last name if shared at sign-up (Apple only provides this on first sign-up).</p>
+
+<h3>3.3 Content you create</h3>
+<ul>
+<li><strong>Games</strong> you contribute: name, description, objective, setup, rules, type, player counts, duration, difficulty, age rating, equipment, setting, up to 10 photos, and public/private visibility. Each submission has a review status (pending / approved / rejected) and, if rejected, a reason — see §3.5.</li>
+<li><strong>Comments</strong> you post on games, and comments you like.</li>
+<li><strong>Alias suggestions</strong> you submit for a game's alternative names, and their review status.</li>
+<li><strong>Games you favourite or upvote.</strong></li>
+<li><strong>Achievements</strong> you earn.</li>
+<li><strong>Reports</strong> you submit about other games (reason text and which game).</li>
+<li><strong>Feedback</strong> you submit to us (type and message).</li>
+</ul>
+<p>Anything you mark <strong>public</strong> is visible to other users. Anything you mark <strong>private</strong> is visible only to you.</p>
+
+<h3>3.4 Photos and images</h3>
+<p>When you upload a photo (for a game or your avatar), it's first placed in a private <strong>quarantine</strong> storage area and screened by our AI moderation provider (§3.5) before becoming publicly visible. Approved images are copied to public storage and served via a public URL; rejected images are discarded.</p>
+
+<h3>3.5 Content moderation</h3>
+<p>Text you submit and images you upload are automatically checked with an AI moderation model before being made public, to detect content such as hate speech or graphic/sexual imagery. Game submissions may also go through human review by our admin team. If rejected, we store a reason (a standard category plus an optional free-text note) and show it to you in-app so you can fix and resubmit — editing a rejected game puts it back into review. This screening is an editorial step, not a decision that produces legal effects on you — see §4.</p>
+
+<h3>3.6 Analytics data (Amplitude)</h3>
+<p>Our app uses <strong>Amplitude</strong> to understand how the app is used (e.g. which screens are viewed, key in-app actions). Amplitude may process a device identifier, app/usage events, and technical data such as device type, OS version and approximate location derived from IP. See Amplitude's privacy policy: <a class="text-primary underline" href="https://amplitude.com/privacy" target="_blank" rel="noopener">amplitude.com/privacy</a>.</p>
+
+<h3>3.7 Push notification data</h3>
+<p>If you enable notifications, we store a device push token and platform (iOS/Android) so we can deliver notifications (achievement unlocks, announcements, review status updates) via Expo's push service. We keep a record of notifications sent and their delivery status.</p>
+
+<h3>3.8 QR / short-link data</h3>
+<p>Some marketing/social links route through short codes we host (e.g. <code>qr.whatsthatgame.co.uk/&lt;code&gt;</code>). We record an aggregate scan count per link — we do not tie individual scans to your account.</p>
+
+<h3>3.9 Technical data</h3>
+<p>When the app calls our backend, our hosting provider processes standard request metadata (IP address, timestamps, user-agent) for security and reliability. Authentication uses a JWT token stored in a secure, HTTP-only cookie and/or sent as a bearer token from the app.</p>
+</section>
+
+<section id="how-we-use">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">gavel</span></div>
+<h2 class="text-2xl font-extrabold">4. How we use your data (purposes &amp; legal bases)</h2>
+</div>
+<div class="overflow-x-auto border-2 border-outline-variant rounded-xl">
+<table class="w-full text-left border-collapse text-sm">
+<thead class="bg-surface-container-high">
+<tr><th class="p-3 border-b-2 border-outline-variant font-bold">Purpose</th><th class="p-3 border-b-2 border-outline-variant font-bold">Legal basis (GDPR)</th></tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr><td class="p-3">Create and run your account, authenticate you</td><td class="p-3 italic">Performance of a contract</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3">Store and display games, photos, comments, aliases, favourites</td><td class="p-3 italic">Performance of a contract</td></tr>
+<tr><td class="p-3">Semantic search and AI text suggestions</td><td class="p-3 italic">Performance of a contract / legitimate interest</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3">Content moderation (automated + human review)</td><td class="p-3 italic">Legitimate interest / legal obligation</td></tr>
+<tr><td class="p-3">Age-appropriate content gating</td><td class="p-3 italic">Legitimate interest / legal obligation</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3">Push notifications</td><td class="p-3 italic">Consent (notification permission)</td></tr>
+<tr><td class="p-3">Transactional emails (e.g. password reset)</td><td class="p-3 italic">Performance of a contract</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3">Product analytics and improvement (Amplitude)</td><td class="p-3 italic">Consent, where required, otherwise legitimate interest</td></tr>
+<tr><td class="p-3">Security, fraud/abuse prevention, debugging</td><td class="p-3 italic">Legitimate interest</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3">Service and security communications</td><td class="p-3 italic">Performance of a contract / legitimate interest</td></tr>
+</tbody>
+</table>
+</div>
+<div class="mt-6 bg-secondary-container rounded-xl p-6 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">shield_with_heart</span>
+<p class="text-on-secondary-container font-medium">We do not use your data for automated decisions that produce legal effects on you. Content moderation only screens content before publication; it does not affect your account status. If a game is rejected you can edit and resubmit it, or contact us.</p>
+</div>
+</section>
+
+<section id="ai-features">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container flex items-center justify-center text-on-tertiary-container"><span class="material-symbols-outlined">psychology</span></div>
+<h2 class="text-2xl font-extrabold">5. AI features and how your content is processed</h2>
+</div>
+<p>When you create or edit a game, the game's text is sent to <strong>OpenAI</strong> to:</p>
+<ul>
+<li>Generate a semantic-search embedding (<code>text-embedding-3-small</code>), stored so your game can be found by meaning-based search.</li>
+<li>Optionally improve a field's wording when you use the AI optimiser (<code>gpt-4.1-nano</code>) or the "brain dump" free-text-to-fields feature.</li>
+<li>Screen text and uploaded images for policy violations using an AI moderation model, before the content is made public.</li>
+</ul>
+<p>Only the content you submit (game text, comments, images) is sent — not your account credentials. OpenAI processes this as our service provider. See OpenAI's privacy policy: <a class="text-primary underline" href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">openai.com/policies/privacy-policy</a>. We recommend not putting personal or sensitive information into game text, comments, or photos.</p>
+</section>
+
+<section id="sharing">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">share</span></div>
+<h2 class="text-2xl font-extrabold">6. Third parties we share data with</h2>
+</div>
+<p>We share data only with providers that help us run the service:</p>
+<div class="overflow-x-auto border-2 border-outline-variant rounded-xl mt-4">
+<table class="w-full text-left border-collapse text-sm">
+<thead class="bg-surface-container-high">
+<tr><th class="p-3 border-b-2 border-outline-variant font-bold">Provider</th><th class="p-3 border-b-2 border-outline-variant font-bold">Role</th><th class="p-3 border-b-2 border-outline-variant font-bold">What they receive</th></tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr><td class="p-3 font-bold text-primary">Google</td><td class="p-3">Sign-in (OAuth)</td><td class="p-3">Authentication exchange; we receive your basic profile</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3 font-bold text-primary">Apple</td><td class="p-3">Sign in with Apple</td><td class="p-3">Authentication exchange; we receive your Apple ID, email (or relay address) and name</td></tr>
+<tr><td class="p-3 font-bold text-primary">OpenAI</td><td class="p-3">Embeddings, AI text suggestions, content moderation</td><td class="p-3">Game/comment text and images you submit</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3 font-bold text-primary">Amplitude</td><td class="p-3">Product analytics</td><td class="p-3">Usage events and device/technical data</td></tr>
+<tr><td class="p-3 font-bold text-primary">Railway</td><td class="p-3">Hosting + managed PostgreSQL database</td><td class="p-3">All data needed to run the service, stored at rest</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3 font-bold text-primary">Cloudflare (R2)</td><td class="p-3">Photo and avatar storage</td><td class="p-3">Uploaded image files, in quarantine and public storage</td></tr>
+<tr><td class="p-3 font-bold text-primary">Resend</td><td class="p-3">Transactional email</td><td class="p-3">Your email address, for account emails such as password resets</td></tr>
+<tr class="bg-surface-container-lowest"><td class="p-3 font-bold text-primary">Expo</td><td class="p-3">Push notification delivery</td><td class="p-3">Your device push token and notification content</td></tr>
+</tbody>
+</table>
+</div>
+<div class="mt-6 bg-secondary-container rounded-xl p-6 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 1;">block</span>
+<p class="text-on-secondary-container font-bold">We do not sell your personal data or share it with advertisers.</p>
+</div>
+</section>
+
+<section id="transfers">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">public</span></div>
+<h2 class="text-2xl font-extrabold">7. International transfers</h2>
+</div>
+<p>Our backend and database are hosted on <strong>Railway</strong>, and our processors (Google, Apple, OpenAI, Amplitude, Cloudflare, Resend, Expo) may process data in <strong>Europe</strong> or the <strong>United States</strong>. Where data leaves the UK/EEA, transfers are protected by appropriate safeguards such as Standard Contractual Clauses.</p>
+</section>
+
+<section id="retention">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">history</span></div>
+<h2 class="text-2xl font-extrabold">8. How long we keep data</h2>
+</div>
+<ul>
+<li><strong>Active accounts:</strong> account data and content are kept while your account is active.</li>
+<li><strong>Account deletion — Stage 1 (Day 0):</strong> when you request deletion, your account is deactivated immediately and login is blocked. Your data is not yet deleted.</li>
+<li><strong>Recovery window (Days 1–30):</strong> you can reactivate your account and restore full access within 30 days of requesting deletion.</li>
+<li><strong>Account deletion — Stage 2 (Day 30):</strong> after the 30-day window expires, we permanently erase your personal data (name, email — including any Apple "Hide My Email" relay address, date of birth, country, avatar, authentication credentials, and any third-party sign-in identifier such as your Apple or Google user ID). Private games and their associated content (including photos) are deleted. Public games you contributed are retained anonymously (attributed to "Deleted user"). Comments you posted are retained anonymously. Reports, favourites, alias suggestions, achievements, feedback, and push tokens are deleted.</li>
+<li><strong>Rejected/quarantined images</strong> that never pass moderation are discarded and not made public.</li>
+<li><strong>Analytics data</strong> is retained according to Amplitude's retention settings.</li>
+<li><strong>Backups and logs</strong> are kept for a limited period for security and recovery, then deleted.</li>
+</ul>
+<div class="mt-6 bg-secondary-container rounded-xl p-6 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">delete_forever</span>
+<p class="text-on-secondary-container font-medium">Request account deletion in-app any time. Your data is fully erased <span class="font-bold underline">30 days</span> after the request, unless you reactivate first.</p>
+</div>
+</section>
+
+<section id="rights">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">how_to_reg</span></div>
+<h2 class="text-2xl font-extrabold">9. Your rights and choices</h2>
+</div>
+<p>Depending on your location, you have the right to access, correct, delete, restrict, or object to processing of your personal data, and to data portability.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+<div class="p-4 border-2 border-outline-variant rounded-xl hover:border-primary transition-colors">
+<h3 class="font-bold mb-1 mt-0">Delete your account</h3>
+<p class="text-sm text-on-surface-variant">Request deletion from within the app. Deactivated immediately, permanently erased after 30 days (§8). You can cancel and reactivate within those 30 days, or email us for manual erasure.</p>
+</div>
+<div class="p-4 border-2 border-outline-variant rounded-xl hover:border-primary transition-colors">
+<h3 class="font-bold mb-1 mt-0">Access / correction</h3>
+<p class="text-sm text-on-surface-variant">Update your profile in the app, or contact us.</p>
+</div>
+<div class="p-4 border-2 border-outline-variant rounded-xl hover:border-primary transition-colors">
+<h3 class="font-bold mb-1 mt-0">Push notifications</h3>
+<p class="text-sm text-on-surface-variant">Disable at any time via in-app settings or OS-level controls; this removes your stored device token.</p>
+</div>
+<div class="p-4 border-2 border-outline-variant rounded-xl hover:border-primary transition-colors">
+<h3 class="font-bold mb-1 mt-0">Withdraw analytics consent</h3>
+<p class="text-sm text-on-surface-variant">Where we rely on consent, withdraw it any time via in-app settings / OS-level controls.</p>
+</div>
+</div>
+<p class="mt-4">To exercise any right, email <a class="text-primary underline" href="mailto:whatsthatgameteam@gmail.com">whatsthatgameteam@gmail.com</a>. You also have the right to complain to your data protection authority (in the UK, the ICO: <a class="text-primary underline" href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>).</p>
+</section>
+
+<section id="children">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">child_care</span></div>
+<h2 class="text-2xl font-extrabold">10. Children</h2>
+</div>
+<p>What's That Game is not directed at children under <strong>13</strong>. You must be at least 13 to create an account. We do not knowingly collect data from children under that age. If you believe a child has given us data, contact us and we will delete it. Some games are gated as adult content and require an appropriate age.</p>
+</section>
+
+<section id="security">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">encrypted</span></div>
+<h2 class="text-2xl font-extrabold">11. Security</h2>
+</div>
+<p>Passwords are stored only as bcrypt hashes. Authentication uses signed JWT tokens over HTTPS in HTTP-only cookies. Uploaded images pass through a private quarantine area and automated moderation before becoming public. Access to production data is restricted. No system is perfectly secure, but we take reasonable technical and organisational measures to protect your data.</p>
+</section>
+
+<section id="changes">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">update</span></div>
+<h2 class="text-2xl font-extrabold">12. Changes to this policy</h2>
+</div>
+<p>We may update this policy. We will post the new version with an updated "Last updated" date and, for material changes, notify you in the app.</p>
+</section>
+
+<section id="contact">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">alternate_email</span></div>
+<h2 class="text-2xl font-extrabold">13. Contact</h2>
+</div>
+<p class="mb-4">What's That Game (founding team)</p>
+<a class="inline-flex items-center gap-3 bg-primary text-on-primary px-6 py-3 rounded-full font-bold hover:shadow-lg transition-all" href="mailto:whatsthatgameteam@gmail.com">
+<span class="material-symbols-outlined">mail</span>
+whatsthatgameteam@gmail.com
+</a>
+</section>
+
+</article>
+</main>
+
+<!-- FOOTER -->
+<footer class="w-full py-12 bg-surface-container border-t-2 border-outline-variant">
+<div class="flex flex-col md:flex-row items-center justify-between gap-6 px-6 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-on-surface">What's That Game?</div>
+<p class="text-on-surface-variant opacity-80 text-center">Solving the world's most annoying question, one game night at a time.</p>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary underline" href="mailto:hello@whatsthatgame.info">Contact</a>
+<a class="text-on-surface-variant hover:text-primary underline" href="business.html">Business Portal</a>
+<a class="text-primary underline" href="privacy.html">Privacy Policy</a>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 mt-8 pt-8 border-t border-outline-variant/30 text-center">
+<p class="text-on-surface-variant opacity-60 text-sm">© 2026 What's That Game? All rights reserved.</p>
+</div>
+</footer>
+
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuToggleIcon = document.getElementById('menu-toggle-icon');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            menuToggle.setAttribute('aria-expanded', String(isHidden));
+            menuToggleIcon.textContent = isHidden ? 'close' : 'menu';
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggleIcon.textContent = 'menu';
+            });
+        });
+    }
+
+    const tocToggle = document.getElementById('toc-toggle');
+    const tocContent = document.getElementById('toc-content');
+    const tocChevron = document.getElementById('toc-chevron');
+
+    if (tocToggle) {
+        tocToggle.addEventListener('click', () => {
+            const isHidden = tocContent.classList.contains('hidden');
+            if (isHidden) {
+                tocContent.classList.remove('hidden');
+                tocChevron.style.transform = 'rotate(180deg)';
+            } else {
+                tocContent.classList.add('hidden');
+                tocChevron.style.transform = 'rotate(0deg)';
+            }
+        });
+    }
+
+    document.querySelectorAll('#toc-content a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                if (window.innerWidth < 768) {
+                    tocContent.classList.add('hidden');
+                    tocChevron.style.transform = 'rotate(0deg)';
+                }
+                const offset = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                window.scrollTo({ top: offset, behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
