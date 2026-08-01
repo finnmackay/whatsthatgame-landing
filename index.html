@@ -203,7 +203,7 @@ A crowd-sourced library of social games — card games, drinking games, party fa
 </div>
 <div class="bg-surface-container-low bento-card rounded-xl p-4 md:p-6 text-center">
 <div class="text-2xl md:text-3xl font-black text-primary" id="stat-game-count">49</div>
-<div class="text-xs md:text-sm text-on-surface-variant mt-1">Games, all user-submitted</div>
+<div class="text-xs md:text-sm text-on-surface-variant mt-1">Games in the library</div>
 </div>
 <div class="bg-surface-container-low bento-card rounded-xl p-4 md:p-6 text-center">
 <div class="text-2xl md:text-3xl font-black text-primary">∞</div>
@@ -410,25 +410,16 @@ Partner With Us
             });
     }
 
-    // Live game count. Tries the true total (all approved games, incl. gated
-    // 18+ ones not in the public catalogue) first, falls back to the public-only
-    // count, then to the static number above if both fail (e.g. CORS not yet
-    // configured for this origin).
+    // Live game count. Falls back to the static number above if the API
+    // call fails (e.g. CORS not yet configured for this origin).
     const gameCountEl = document.getElementById('stat-game-count');
 
-    fetch('https://api.whatsthatgame.co.uk/games/count/total')
+    fetch('https://api.whatsthatgame.co.uk/games/count')
         .then(res => res.ok ? res.json() : Promise.reject(res.status))
         .then(data => {
             if (typeof data.count === 'number') gameCountEl.textContent = data.count;
         })
-        .catch(() => {
-            fetch('https://api.whatsthatgame.co.uk/games/?limit=1000')
-                .then(res => res.ok ? res.json() : Promise.reject(res.status))
-                .then(games => {
-                    if (Array.isArray(games)) gameCountEl.textContent = games.length;
-                })
-                .catch(() => { /* keep static fallback */ });
-        });
+        .catch(() => { /* keep static fallback */ });
 </script>
 </body>
 </html>
