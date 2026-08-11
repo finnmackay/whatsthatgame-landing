@@ -1,7 +1,5 @@
 {
   "outputDirectory": ".",
   "buildCommand": null,
-  "rewrites": [
-    { "source": "/reset-password", "destination": "/reset-password.html" }
-  ]
+  "cleanUrls": true
 }
