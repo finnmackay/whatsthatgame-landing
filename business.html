@@ -7,7 +7,10 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <meta name="description" content="Run better game nights at your pub, school, hostel, or event. What's That Game? gives venues and organisers a curated library of social games for any crowd.">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -83,156 +86,151 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .bento-card { transition: transform 0.2s ease-in-out; }
+        .bento-card { transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .bento-card:hover { transform: translateY(-4px); }
         .success-msg { display: none; }
+        .success-msg.visible { display: block; animation: successIn 400ms cubic-bezier(0.16,1,0.3,1) forwards; }
+        @keyframes successIn { from { opacity: 0; transform: translateY(4px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+        .stage-in { opacity: 0; transform: translateY(18px); animation: stageIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+        @keyframes stageIn { to { opacity: 1; transform: translateY(0); } }
+
+        .reveal-up { opacity: 0; }
+        .reveal-up.in-view { animation: revealUp 0.6s cubic-bezier(0.2,0.7,0.2,1) forwards; }
+        @keyframes revealUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* mobile nav collapse — grows from the trigger instead of teleporting */
+        #mobile-menu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 380ms cubic-bezier(0.16,1,0.3,1), opacity 280ms ease-out; }
+        #mobile-menu.menu-open { max-height: 380px; opacity: 1; }
+
+        /* hamburger → X morph */
+        .hamburger-bars { position: relative; width: 20px; height: 14px; display: inline-block; }
+        .hamburger-bar { position: absolute; left: 0; width: 100%; height: 2px; border-radius: 1px; background: currentColor; transition: transform 380ms cubic-bezier(0.16,1,0.3,1), opacity 260ms ease-out, top 380ms cubic-bezier(0.16,1,0.3,1); }
+        .hamburger-bar:nth-child(1) { top: 0; }
+        .hamburger-bar:nth-child(2) { top: 6px; }
+        .hamburger-bar:nth-child(3) { top: 12px; }
+        #menu-toggle.menu-toggle-open .hamburger-bar:nth-child(1) { top: 6px; transform: rotate(45deg); }
+        #menu-toggle.menu-toggle-open .hamburger-bar:nth-child(2) { opacity: 0; }
+        #menu-toggle.menu-toggle-open .hamburger-bar:nth-child(3) { top: 6px; transform: rotate(-45deg); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .stage-in, .reveal-up, .success-msg.visible { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+            #mobile-menu { transition: none !important; }
+            .hamburger-bar { transition: none !important; }
+        }
     </style>
 </head>
 <body class="bg-background text-on-background antialiased selection:bg-primary-fixed">
 <!-- TopAppBar -->
 <header class="w-full sticky top-0 z-50 bg-surface dark:bg-background border-b-2 border-outline-variant dark:border-outline shadow-sm">
-<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="flex justify-between items-center h-[72px] px-6 max-w-7xl mx-auto">
 <a href="/" class="text-2xl font-black text-primary dark:text-primary-fixed-dim tracking-tight">What's That Game?</a>
 <nav class="hidden md:flex gap-8 items-center">
 <a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors font-medium" href="/">Home</a>
-<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary" href="/business">Business Portal</a>
-<a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors font-medium" href="/#features">Features</a>
+<a class="text-primary dark:text-primary-fixed font-medium border-b-2 border-primary" href="/business">Business Portal</a>
 <a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors font-medium" href="/terms">Terms</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors font-medium" href="/privacy">Privacy</a>
 </nav>
 <div class="hidden md:flex items-center gap-4">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1.5 text-outline dark:text-outline font-bold px-3 py-2 rounded-lg text-sm cursor-default" title="Coming soon">
+<svg class="inline-block w-[1.1em] h-[1.1em] align-[-0.15em]" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> App Store <span class="font-normal text-xs">(soon)</span>
+</span>
+<span class="flex items-center gap-1.5 text-outline dark:text-outline font-bold px-3 py-2 rounded-lg text-sm cursor-default" title="Coming soon">
+<span class="material-symbols-outlined text-lg">android</span> Google Play <span class="font-normal text-xs">(soon)</span>
+</span>
+</div>
 <a href="#contact" class="px-5 py-2 bg-primary text-on-primary font-bold rounded-lg shadow-lg hover:scale-105 active:scale-95 transition-all">Get in Touch</a>
 </div>
 <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" class="md:hidden flex items-center justify-center w-10 h-10 text-primary dark:text-primary-fixed-dim" id="menu-toggle">
-<span class="material-symbols-outlined" id="menu-toggle-icon">menu</span>
+<span class="hamburger-bars" aria-hidden="true"><span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span></span>
 </button>
 </div>
-<nav class="hidden md:hidden flex-col border-t-2 border-outline-variant dark:border-outline bg-surface dark:bg-background" id="mobile-menu">
+<nav class="md:hidden border-t-2 border-outline-variant dark:border-outline bg-surface dark:bg-background" id="mobile-menu">
+<div class="flex flex-col mobile-menu-inner">
 <a class="px-6 py-3 text-on-surface-variant dark:text-outline hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="/">Home</a>
 <a class="px-6 py-3 text-primary dark:text-primary-fixed font-bold bg-surface-container-low" href="/business">Business Portal</a>
-<a class="px-6 py-3 text-on-surface-variant dark:text-outline hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="/#features">Features</a>
 <a class="px-6 py-3 text-on-surface-variant dark:text-outline hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="/terms">Terms</a>
+<a class="px-6 py-3 text-on-surface-variant dark:text-outline hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="/privacy">Privacy</a>
+<span class="px-6 py-3 text-outline font-medium flex items-center gap-2 cursor-default"><svg class="inline-block w-[1.1em] h-[1.1em] align-[-0.15em]" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> App Store <span class="text-xs">(soon)</span></span>
+<span class="px-6 py-3 text-outline font-medium flex items-center gap-2 cursor-default"><span class="material-symbols-outlined text-lg">android</span> Google Play <span class="text-xs">(soon)</span></span>
 <a class="px-6 py-3 bg-primary text-on-primary font-bold text-center rounded-lg mx-6 my-2" href="#contact">Get in Touch</a>
+</div>
 </nav>
 </header>
 <main class="max-w-7xl mx-auto px-6 py-12 md:py-20">
 <!-- Hero Section -->
 <section class="text-center mb-24">
-<span class="inline-block px-4 py-1.5 mb-6 rounded-full bg-secondary-container text-on-secondary-container font-bold text-sm uppercase tracking-wider">For Professional Venues</span>
-<h1 class="text-5xl md:text-7xl font-extrabold text-on-surface mb-8 tracking-tighter leading-[1.1]">
+<span class="inline-block px-4 py-1.5 mb-6 rounded-full bg-secondary-container text-on-secondary-container font-bold text-sm uppercase tracking-wider stage-in">For Professional Venues</span>
+<h1 class="text-5xl md:text-7xl font-extrabold text-on-surface mb-8 tracking-tighter leading-[1.1] stage-in" style="animation-delay: 0.12s;">
                 Levelling Up <span class="text-primary">Engagement</span> &amp; Play.
             </h1>
-<p class="max-w-2xl mx-auto text-lg md:text-xl text-on-surface-variant font-medium leading-relaxed mb-10">
+<p class="max-w-2xl mx-auto text-lg md:text-xl text-on-surface-variant font-medium leading-relaxed mb-10 stage-in" style="animation-delay: 0.24s;">
                 Transform your venue into a hub of social interaction. Whether you're a local pub, a modern school, or a bustling hostel, our platform brings people together through the power of play.
             </p>
-<div class="flex flex-col sm:flex-row justify-center gap-4">
-<a class="px-8 py-4 border-2 border-outline-variant text-on-surface font-bold rounded-xl hover:bg-surface-container-low transition-all text-center" href="#contact">Request a Demo</a>
+<div class="flex flex-col sm:flex-row justify-center gap-4 stage-in" style="animation-delay: 0.36s;">
+<a class="px-8 py-4 border-2 border-outline-variant text-on-surface font-bold rounded-xl hover:bg-surface-container-low transition-all text-center" href="#contact">Get in Touch</a>
 </div>
 </section>
 <!-- "Who it's for" Bento Grid -->
-<section class="mb-32">
+<section class="mb-16 md:mb-32">
 <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
 <div class="max-w-xl">
 <h2 class="text-4xl font-extrabold text-on-surface mb-4">Who is it for?</h2>
 <p class="text-on-surface-variant font-medium">Designed for diverse environments where community and engagement are the top priorities.</p>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
 <!-- Pubs -->
-<div class="bento-card relative group overflow-hidden bg-surface-container-high rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
-<div class="mb-6 w-14 h-14 bg-primary rounded-2xl flex items-center justify-center text-on-primary">
+<div class="md:col-span-2 bento-card reveal-up relative overflow-hidden bg-surface-container-high rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
+<span class="material-symbols-outlined absolute -right-5 -bottom-5 text-[150px] text-on-surface/5 pointer-events-none select-none" aria-hidden="true">sports_bar</span>
+<div class="relative mb-6 w-14 h-14 bg-primary rounded-2xl flex items-center justify-center text-on-primary">
 <span class="material-symbols-outlined text-3xl">sports_bar</span>
 </div>
-<h3 class="text-2xl font-bold mb-4">Local Pubs</h3>
-<p class="text-on-surface-variant mb-8">Increase table dwell time and beverage sales with interactive trivia nights and digital board games. Perfect for mid-week engagement.</p>
-<div class="relative h-48 rounded-2xl overflow-hidden mt-auto">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="A lively modern gastro-pub interior during evening service. People are laughing around wooden tables, holding drinks, and interacting with vibrant digital game screens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_pmYjC74eXguF-_qBRI-2ONwfrCa1txbbKpMTp-_uG3pZM1-DDt9HPdCpnYARFe0h_xlQhvjMXXmTnZ0V9NhL1K-_ipvlfDVV99sQushgRK8PAokx2kf32qXqemW0e29hI4VGR9wcE8iMe_QZqpcV7MrJWOO8IFFMCRMIoGPkCYnw4l_IE877BDAXAOteGaa4jm2_5FJXiXPAhcdbgKo2vZ6hJI_N7dHW5i4gzmq9yfcf-Qc2pU3UGA">
-</div>
+<h3 class="relative text-2xl font-bold mb-4">Local Pubs</h3>
+<p class="relative text-on-surface-variant">Increase table dwell time and beverage sales with interactive trivia nights and digital board games. Perfect for mid-week engagement.</p>
 </div>
 <!-- Schools -->
-<div class="bento-card relative group overflow-hidden bg-surface-container-highest rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
-<div class="mb-6 w-14 h-14 bg-tertiary-container rounded-2xl flex items-center justify-center text-on-tertiary-container">
+<div class="md:col-span-2 bento-card reveal-up relative overflow-hidden bg-surface-container-highest rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
+<span class="material-symbols-outlined absolute -right-5 -bottom-5 text-[150px] text-on-surface/5 pointer-events-none select-none" aria-hidden="true">school</span>
+<div class="relative mb-6 w-14 h-14 bg-tertiary-container rounded-2xl flex items-center justify-center text-on-tertiary-container">
 <span class="material-symbols-outlined text-3xl">school</span>
 </div>
-<h3 class="text-2xl font-bold mb-4">Schools &amp; Colleges</h3>
-<p class="text-on-surface-variant mb-8">Gamified learning and icebreakers for common rooms. Help students connect and build community in a safe, moderated environment.</p>
-<div class="relative h-48 rounded-2xl overflow-hidden mt-auto">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="A bright, modern university student union common room with modular seating and vibrant wall murals. Students are clustered together, collaborating on a digital educational game on a large wall-mounted display." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkH7haUM2jTo4C0Ck92V6Fydmbc772NhAv3rdd6_7wW8NLsj5H36Vqo6Bv-7yM295VUsNePGW2BubFhHMp5uTGw-o_EWpEe8Rl8c8lPbxkwiOkLMbMy_Vuwz7bwcjaeyiAYjo7nJM7XpsRf5EQMtRlwVO4cBMPMEKHDKBkPWrgki83Y0jq2633v9XE_93GE7zvobLXv5YPUBlU5U05U0pXFnQWMM6fPXJvcKSNK0iu_ZRlusGZzEi_zw">
-</div>
+<h3 class="relative text-2xl font-bold mb-4">Schools &amp; Colleges</h3>
+<p class="relative text-on-surface-variant">Gamified learning and icebreakers for common rooms. Help students connect and build community in a safe, moderated environment.</p>
 </div>
 <!-- Hostels -->
-<div class="bento-card relative group overflow-hidden bg-primary-fixed rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
-<div class="mb-6 w-14 h-14 bg-primary-container rounded-2xl flex items-center justify-center text-on-primary-container">
+<div class="md:col-span-2 bento-card reveal-up relative overflow-hidden bg-primary-fixed rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
+<span class="material-symbols-outlined absolute -right-5 -bottom-5 text-[150px] text-on-surface/5 pointer-events-none select-none" aria-hidden="true">hotel</span>
+<div class="relative mb-6 w-14 h-14 bg-primary-container rounded-2xl flex items-center justify-center text-on-primary-container">
 <span class="material-symbols-outlined text-3xl">hotel</span>
 </div>
-<h3 class="text-2xl font-bold mb-4">Travel Hostels</h3>
-<p class="text-on-surface-variant mb-8">The ultimate digital social lubricant for global travelers. Break the ice in the lobby and create unforgettable guest experiences.</p>
-<div class="relative h-48 rounded-2xl overflow-hidden mt-auto">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="A trendy urban hostel lounge with neon signs and industrial design. Travelers from diverse backgrounds are gathered around a central table, playing an interactive digital game while sharing snacks." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxw8XlshA7dx8ILoRXj7Y5SaD7e3mp4CoVnWc4SjDaX2PDgmYUg0aCa4wg6ONXyXnlBOt8Ia3BwOtU4HNR5qA2ouuuxUOvBxspuNSRNk-kt9XVys_R2be4ZNwQ74mC4Qp3RtdLR8PnCiHMoP08r5Mp353sfeU67tbDuJAJ-SAIE45nyCBRG3xmw_n9bxhyYdD4yaLGbhS1whNkexi9hj8RBuJ6UzCFR-i7q9JHvtnWegnK1liRsxFbnQ">
-</div>
+<h3 class="relative text-2xl font-bold mb-4">Travel Hostels</h3>
+<p class="relative text-on-surface-variant">The ultimate digital social lubricant for global travelers. Break the ice in the lobby and create unforgettable guest experiences.</p>
 </div>
 <!-- University Students -->
-<div class="bento-card relative group overflow-hidden bg-surface-container-high rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
-<div class="mb-6 w-14 h-14 bg-primary rounded-2xl flex items-center justify-center text-on-primary">
-<span class="material-symbols-outlined text-3xl">school</span>
-</div>
-<h3 class="text-2xl font-bold mb-4">University Students</h3>
-<p class="text-on-surface-variant mb-8">Perfect for society socials, freshers week ice-breakers, and student union events. Low-friction games that get everyone talking without the awkwardness.</p>
-<div class="relative h-48 rounded-2xl overflow-hidden mt-auto">
-<img alt="A diverse group of university students laughing and playing a digital game together in a modern student union common room, black and white photography." class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArtPh9Joh_BqlOWROBdgPbd3Gpqe2F50T6xYDIcb8tjyjgxK_jpJAddWCDusyJdjHY3Gxj1zYL1LAwiEbnpUrBi8A0P0fKVmApC0H1dVugqpdN9ROifv63UeUOAPouG1YsVG6xEQZMjIzsiN8Wqmp990of5C8EtEXt-DtcNdOqLvSO8k8X8scwdRZJSj6DMewuAl4TnXD7GqMl6wJjLhyUgD5sqZpnxPHKZuOVLNPt2CRR4CNR3NvCww">
-</div>
-</div>
-<!-- Summer Camps -->
-<div class="bento-card relative group overflow-hidden bg-surface-container-highest rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
-<div class="mb-6 w-14 h-14 bg-tertiary-container rounded-2xl flex items-center justify-center text-on-tertiary-container">
-<span class="material-symbols-outlined text-3xl">wb_sunny</span>
-</div>
-<h3 class="text-2xl font-bold mb-4">Summer Camps</h3>
-<p class="text-on-surface-variant mb-8">Turn rainy days into highlights. Our library offers safe, age-appropriate games that require zero equipment, perfect for camp counselors on the go.</p>
-<div class="relative h-48 rounded-2xl overflow-hidden mt-auto">
-<img alt="Kids and counselors playing an energetic group game in a rustic camp cabin, black and white photography." class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOrLkQ0UELwOqNgU3yNgkbmrVkswzoH5TF7MgKvEzxiegyWhGD2iSPFgkP45JsW7VRp8Qf3LUHBxxwNUM22qu-n3Ln8kUpllJnInUSsZrhTGfVk1AzXYYaEqAMa0D9goDyzB9gnmnWqy49uSBmIRXXwgU2nV1XXv8sCsOiFU88j9OXy1nV9oqSR4bkM1OzeLiAjWlOllxToJWYGB1rEDE99b0efO798PuSJlNGfh9Ryo5MOKDWWd_TWA">
-</div>
-</div>
-<!-- Friends & Groups -->
-<div class="bento-card relative group overflow-hidden bg-primary-fixed rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
-<div class="mb-6 w-14 h-14 bg-primary-container rounded-2xl flex items-center justify-center text-on-primary-container">
+<div class="md:col-span-2 md:col-start-2 bento-card reveal-up relative overflow-hidden bg-surface-container-high rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
+<span class="material-symbols-outlined absolute -right-5 -bottom-5 text-[150px] text-on-surface/5 pointer-events-none select-none" aria-hidden="true">groups</span>
+<div class="relative mb-6 w-14 h-14 bg-primary rounded-2xl flex items-center justify-center text-on-primary">
 <span class="material-symbols-outlined text-3xl">groups</span>
 </div>
-<h3 class="text-2xl font-bold mb-4">Friends &amp; Groups</h3>
-<p class="text-on-surface-variant mb-8">Level up your next house party or casual hangout. From intense strategy to quick-fire drinking games, we've got the perfect vibe for your squad.</p>
-<div class="relative h-48 rounded-2xl overflow-hidden mt-auto">
-<img alt="A group of friends gathered around a coffee table in a cozy living room, playing a game and having fun, black and white photography." class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC5NVYvyMiXzF4d1AeJp6HAFcSjpFFT0wH-FracZxo2-nLd_0HTETifcUZio7i7MIKZpM1CPSrf-BAgfuSggtBFyT6Cc5i4Fm5vXGDAnAF1xMMUcXPAtAXT-Coj-h5_j2sjcZKeOCqac3DuTIEJue_ncRR4YFD1fmkuTRJ5g-uH2nKoCq06N-MliL_WO9ITrpKP8jgHNSaeclxHgcvCidZQ13S1olsN9GTPhcPKirtdLMgPlQH0uuFnw">
+<h3 class="relative text-2xl font-bold mb-4">University Students</h3>
+<p class="relative text-on-surface-variant">Perfect for society socials, freshers week ice-breakers, and student union events. Low-friction games that get everyone talking without the awkwardness.</p>
 </div>
-</div></div>
-</section>
-<!-- "How it works" section -->
-<section class="mb-32 relative py-20 px-8 rounded-[2rem] bg-on-surface text-surface overflow-hidden">
-<div class="relative z-10">
-<div class="text-center mb-16">
-<h2 class="text-4xl font-extrabold mb-4">Simplicity by Design</h2>
-<p class="text-surface-variant opacity-80 font-medium">Getting your venue ready in 3 simple steps.</p>
+<!-- Summer Camps -->
+<div class="md:col-span-2 bento-card reveal-up relative overflow-hidden bg-surface-container-highest rounded-3xl p-8 border-2 border-transparent hover:border-primary transition-all">
+<span class="material-symbols-outlined absolute -right-5 -bottom-5 text-[150px] text-on-surface/5 pointer-events-none select-none" aria-hidden="true">wb_sunny</span>
+<div class="relative mb-6 w-14 h-14 bg-tertiary-container rounded-2xl flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined text-3xl">wb_sunny</span>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-<div class="text-center px-4">
-<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-on-primary font-black text-2xl mb-6">1</div>
-<h4 class="text-xl font-bold mb-3">Claim Your Venue</h4>
-<p class="text-surface-variant opacity-70">Register your space on our map and customize your profile with your brand's unique identity.</p>
-</div>
-<div class="text-center px-4">
-<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-on-primary font-black text-2xl mb-6">2</div>
-<h4 class="text-xl font-bold mb-3">Select Your Games</h4>
-<p class="text-surface-variant opacity-70">Choose from our massive library of trivia, card games, and social puzzles specifically curated for groups.</p>
-</div>
-<div class="text-center px-4">
-<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-on-primary font-black text-2xl mb-6">3</div>
-<h4 class="text-xl font-bold mb-3">Go Live!</h4>
-<p class="text-surface-variant opacity-70">Players scan a QR code at their table to join the fun instantly. No app downloads required.</p>
-</div>
+<h3 class="relative text-2xl font-bold mb-4">Summer Camps</h3>
+<p class="relative text-on-surface-variant">Turn rainy days into highlights. Our library offers safe, age-appropriate games that require zero equipment, perfect for camp counselors on the go.</p>
 </div>
 </div>
 </section>
 <!-- Contact Form Section -->
 <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center" id="contact">
-<div>
+<div class="reveal-up">
 <h2 class="text-4xl font-extrabold text-on-surface mb-6">Ready to play?</h2>
 <p class="text-on-surface-variant text-lg mb-10">Have questions about how What's That Game? can fit into your venue? Our team is here to help you design the perfect social experience.</p>
 <div class="space-y-6">
@@ -256,7 +254,7 @@
 </a>
 </div>
 </div>
-<div class="bg-surface-container-low p-8 md:p-12 rounded-[2.5rem] border-2 border-outline-variant flex flex-col items-center justify-center">
+<div class="bg-surface-container-low p-8 md:p-12 rounded-[2.5rem] border-2 border-outline-variant flex flex-col items-center justify-center reveal-up" style="animation-delay: 0.12s;">
 <form class="space-y-6 w-full" id="contact-form" onsubmit="handleContact(event)">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="space-y-2">
@@ -286,7 +284,7 @@
 <button class="w-full py-5 bg-primary text-on-primary font-black rounded-2xl text-lg shadow-xl hover:shadow-primary/30 hover:scale-[1.02] active:scale-95 transition-all" type="submit" id="contact-btn">Send Inquiry</button>
 </form>
 <p class="success-msg text-center font-bold text-primary mt-4 mb-2" id="contact-success">🎉 Thanks! We'll be in touch.</p>
-<p class="error-msg text-center font-bold text-error mt-4 mb-2" id="contact-error" style="display:none;">Something went wrong — email us directly at <a href="mailto:hello@whatsthatgame.info" class="underline">hello@whatsthatgame.info</a>.</p>
+<p class="error-msg text-center font-bold text-error mt-4 mb-2" id="contact-error" style="display:none;">Something went wrong. Email us directly at <a href="mailto:hello@whatsthatgame.info" class="underline">hello@whatsthatgame.info</a>.</p>
 </div>
 </section>
 </main>
@@ -313,27 +311,41 @@
 </footer>
 <script>
         const menuToggle = document.getElementById('menu-toggle');
-        const menuToggleIcon = document.getElementById('menu-toggle-icon');
         const mobileMenu = document.getElementById('mobile-menu');
 
         if (menuToggle) {
             menuToggle.addEventListener('click', () => {
-                const isHidden = mobileMenu.classList.contains('hidden');
-                mobileMenu.classList.toggle('hidden');
-                mobileMenu.classList.toggle('flex');
-                menuToggle.setAttribute('aria-expanded', String(isHidden));
-                menuToggleIcon.textContent = isHidden ? 'close' : 'menu';
+                const isOpening = !mobileMenu.classList.contains('menu-open');
+                mobileMenu.classList.toggle('menu-open');
+                menuToggle.classList.toggle('menu-toggle-open', isOpening);
+                menuToggle.setAttribute('aria-expanded', String(isOpening));
             });
 
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('flex');
+                    mobileMenu.classList.remove('menu-open');
+                    menuToggle.classList.remove('menu-toggle-open');
                     menuToggle.setAttribute('aria-expanded', 'false');
-                    menuToggleIcon.textContent = 'menu';
                 });
             });
         }
+
+        // Scroll reveal for bento cards, how-it-works steps, and contact columns
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal-up').forEach((el, i) => {
+            if (el.classList.contains('bento-card') && !el.style.animationDelay) {
+                el.style.animationDelay = (i * 0.08) + 's';
+            }
+            revealObserver.observe(el);
+        });
 
         // Simple micro-interaction for form inputs
         document.querySelectorAll('input, textarea, select').forEach(element => {
@@ -366,8 +378,12 @@
                 });
 
                 if (response.ok) {
-                    form.style.display = 'none';
-                    successEl.style.display = 'block';
+                    form.style.transition = 'opacity 150ms ease-out';
+                    form.style.opacity = '0';
+                    setTimeout(() => {
+                        form.style.display = 'none';
+                        successEl.classList.add('visible');
+                    }, 150);
                 } else {
                     throw new Error('Formspree submission failed');
                 }

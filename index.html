@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>What's That Game? — Never Ask What To Play Again</title>
+<title>What's That Game? | Never Ask What To Play Again</title>
 <link rel="icon" type="image/png" href="assets/favicon.png"/>
-<meta name="description" content="A crowd-sourced library of social games, findable by describing the moment — not scrolling a category. Card games, drinking games, party games and more." />
+<meta name="description" content="A crowd-sourced library of social games, findable by describing the moment, not scrolling a category. Card games, drinking games, party games and more." />
 <meta property="og:title" content="What's That Game?" />
 <meta property="og:description" content="Describe the moment, get real games. Crowd-sourced by people who actually play them." />
 <meta property="og:type" content="website" />
@@ -68,28 +68,73 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .bento-card { border: 2px solid #181445; transition: transform 0.2s ease; }
+    .bento-card { border: 2px solid #181445; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
     .bento-card:hover { transform: translateY(-4px); }
-    .feature-card { transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    .feature-card:hover { transform: translateY(-4px); }
-    .floating-pill { animation: float 6s ease-in-out infinite; }
+    .feature-card { transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 14px 24px rgba(24,20,69,0.12); }
+    .floating-pill { animation: pillIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards, float 6s ease-in-out infinite; opacity: 0; }
     @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+    @keyframes pillIn { to { opacity: 1; } }
     .waitlist-shadow { box-shadow: 0 8px 30px rgba(99, 14, 212, 0.15); }
     .success-msg { display: none; }
+    .success-msg.visible { display: block; animation: successIn 400ms cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes successIn { from { opacity: 0; transform: translateY(4px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    /* one-shot entrance for hero content, staggered per child via inline animation-delay */
+    .stage-in { opacity: 0; transform: translateY(18px); animation: stageIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes stageIn { to { opacity: 1; transform: translateY(0); } }
+
+    /* logo: settles once instead of bouncing forever */
+    .logo-drop { opacity: 0; transform: translateY(-30px) scale(0.9); animation: logoDrop 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+    @keyframes logoDrop { to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    /* site-wide scroll reveal, not just feature cards — uses `animation` (not
+       `transition`) so it never fights the hover transition already defined
+       on .feature-card / .bento-card for the same elements */
+    .reveal-up { opacity: 0; }
+    .reveal-up.in-view { animation: revealUp 0.6s cubic-bezier(0.2,0.7,0.2,1) forwards; }
+    @keyframes revealUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* category ticker */
+    .ticker-track { display: flex; gap: 12px; width: max-content; animation: tickerScroll 30s linear infinite; }
+    .ticker-viewport:hover .ticker-track { animation-play-state: paused; }
+    @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* mobile nav collapse — max-height over grid-rows: fr-unit track interpolation
+       has spotty real-device support (notably Safari), and this is a small,
+       infrequent toggle where the layout cost is negligible either way */
+    #mobile-menu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 380ms cubic-bezier(0.16,1,0.3,1), opacity 280ms ease-out; }
+    #mobile-menu.menu-open { max-height: 380px; opacity: 1; }
+
+    /* hamburger → X morph */
+    .hamburger-bars { position: relative; width: 20px; height: 14px; display: inline-block; }
+    .hamburger-bar { position: absolute; left: 0; width: 100%; height: 2px; border-radius: 1px; background: currentColor; transition: transform 380ms cubic-bezier(0.16,1,0.3,1), opacity 260ms ease-out, top 380ms cubic-bezier(0.16,1,0.3,1); }
+    .hamburger-bar:nth-child(1) { top: 0; }
+    .hamburger-bar:nth-child(2) { top: 6px; }
+    .hamburger-bar:nth-child(3) { top: 12px; }
+    #menu-toggle.menu-toggle-open .hamburger-bar:nth-child(1) { top: 6px; transform: rotate(45deg); }
+    #menu-toggle.menu-toggle-open .hamburger-bar:nth-child(2) { opacity: 0; }
+    #menu-toggle.menu-toggle-open .hamburger-bar:nth-child(3) { top: 6px; transform: rotate(-45deg); }
+
+    @media (prefers-reduced-motion: reduce) {
+        .stage-in, .logo-drop, .reveal-up, .floating-pill, .success-msg.visible { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+        .ticker-track { animation: none !important; }
+        .hamburger-bar { transition: none !important; }
+        #mobile-menu { transition: none !important; }
+    }
 </style>
 </head>
 <body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
 
 <!-- NAV -->
 <header class="w-full sticky top-0 z-50 bg-surface border-b-2 border-outline-variant shadow-sm">
-<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="flex justify-between items-center h-[72px] px-6 max-w-7xl mx-auto">
 <a href="/" class="text-2xl font-black text-primary tracking-tight">What's That Game?</a>
 <nav class="hidden md:flex gap-8 items-center">
-<a class="text-primary font-bold border-b-2 border-primary" href="#top">Home</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="#features">Features</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="#how-it-works">How It Works</a>
+<a class="text-primary font-medium border-b-2 border-primary" href="#top">Home</a>
 <a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="/business">Business Portal</a>
 <a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="/terms">Terms</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="/privacy">Privacy</a>
 </nav>
 <div class="hidden md:flex items-center gap-4">
 <div class="flex items-center gap-3">
@@ -103,18 +148,19 @@
 <a href="#maillist" class="bg-primary text-on-primary font-bold px-5 py-2 rounded-lg shadow-lg hover:scale-105 active:scale-95 transition-all">Get Notified</a>
 </div>
 <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" class="md:hidden flex items-center justify-center w-10 h-10 text-primary" id="menu-toggle">
-<span class="material-symbols-outlined" id="menu-toggle-icon">menu</span>
+<span class="hamburger-bars" aria-hidden="true"><span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span></span>
 </button>
 </div>
-<nav class="hidden md:hidden flex-col border-t-2 border-outline-variant bg-surface" id="mobile-menu">
+<nav class="md:hidden border-t-2 border-outline-variant bg-surface" id="mobile-menu">
+<div class="flex flex-col mobile-menu-inner">
 <a class="px-6 py-3 text-primary font-bold bg-surface-container-low" href="#top">Home</a>
-<a class="px-6 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="#features">Features</a>
-<a class="px-6 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="#how-it-works">How It Works</a>
 <a class="px-6 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="/business">Business Portal</a>
 <a class="px-6 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="/terms">Terms</a>
+<a class="px-6 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors font-medium" href="/privacy">Privacy</a>
 <span class="px-6 py-3 text-outline font-medium flex items-center gap-2 cursor-default"><svg class="inline-block w-[1.1em] h-[1.1em] align-[-0.15em]" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> App Store <span class="text-xs">(soon)</span></span>
 <span class="px-6 py-3 text-outline font-medium flex items-center gap-2 cursor-default"><span class="material-symbols-outlined text-lg">android</span> Google Play <span class="text-xs">(soon)</span></span>
 <a class="mx-6 my-2 px-6 py-3 bg-primary text-on-primary font-bold text-center rounded-lg" href="#maillist">Get Notified</a>
+</div>
 </nav>
 </header>
 
@@ -122,92 +168,94 @@
 
 <!-- HERO -->
 <section class="flex flex-col items-center text-center py-12 gap-8 md:hidden">
-<div class="w-28 h-28 animate-bounce">
+<div class="w-28 h-28 logo-drop">
 <img alt="What's That Game dice logo" class="w-full h-full object-contain drop-shadow-xl" src="assets/wtg-logo.png"/>
 </div>
-<div class="inline-flex items-center px-4 py-1 rounded-full bg-tertiary-container text-on-tertiary-container font-bold text-xs uppercase tracking-wide border-2 border-on-surface">
+<div class="inline-flex items-center px-4 py-1 rounded-full bg-tertiary-container text-on-tertiary-container font-bold text-xs uppercase tracking-wide border-2 border-on-surface stage-in" style="animation-delay: 0.15s;">
 <svg class="inline-block w-[1em] h-[1em] mr-2 align-[-0.15em]" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
 iOS in App Store review · Android coming soon
 </div>
-<div class="space-y-4">
+<div class="space-y-4 stage-in" style="animation-delay: 0.3s;">
 <h1 class="text-[36px] leading-[40px] font-extrabold text-on-surface tracking-tight">
 Never ask <span class="text-primary italic">what should we play</span> again.
 </h1>
 <p class="text-body-lg text-on-surface-variant max-w-[320px] mx-auto">
-A crowd-sourced library of social games — every one submitted by someone who actually plays it.
+A crowd-sourced library of social games. Every one submitted by someone who actually plays it.
 </p>
 </div>
-<form class="w-full max-w-sm space-y-3 waitlist-shadow p-6 bg-white rounded-xl border-2 border-on-surface" id="hero-form-mobile" onsubmit="handleSignup(event, 'hero-mobile')">
+<form class="w-full max-w-sm space-y-3 waitlist-shadow p-6 bg-white rounded-xl border-2 border-on-surface stage-in" style="animation-delay: 0.44s;" id="hero-form-mobile" onsubmit="handleSignup(event, 'hero-mobile')">
 <input class="w-full px-6 py-4 rounded-lg bg-surface-container border-none focus:ring-2 focus:ring-primary text-on-surface font-medium placeholder:text-outline" placeholder="Enter your email" required type="email" autocomplete="email"/>
 <button class="w-full bg-primary text-on-primary py-4 rounded-lg font-bold text-[16px] hover:bg-primary-container active:scale-95 transition-all shadow-lg" type="submit" id="hero-mobile-btn">Join Mailing List</button>
 </form>
 <div class="success-msg bg-tertiary-container border-2 border-on-surface rounded-xl px-5 py-3 text-on-tertiary-container font-medium max-w-sm" id="hero-mobile-success">
 🎉 You're on the list! We'll be in touch.
 </div>
-<p class="text-sm text-outline">No spam, ever. Just a heads-up when we launch.</p>
+<p class="text-sm text-outline stage-in" style="animation-delay: 0.55s;">No spam, ever. Just a heads-up when we launch.</p>
 </section>
 
 <!-- HERO (desktop) -->
 <section class="relative pt-8 pb-12 overflow-hidden hidden md:block">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 <div class="z-10">
-<div class="inline-flex items-center px-4 py-1 rounded-full bg-tertiary-container text-on-tertiary-container font-bold text-xs uppercase tracking-wide mb-6 border-2 border-on-surface">
+<div class="inline-flex items-center px-4 py-1 rounded-full bg-tertiary-container text-on-tertiary-container font-bold text-xs uppercase tracking-wide mb-6 border-2 border-on-surface stage-in" style="animation-delay: 0.05s;">
 <svg class="inline-block w-[1em] h-[1em] mr-2 align-[-0.15em]" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
 iOS in App Store review · Android coming soon
 </div>
-<h1 class="font-display text-[48px] md:text-[56px] leading-[1.1] font-extrabold text-on-surface mb-6 tracking-tight">
+<h1 class="font-display text-[48px] md:text-[56px] leading-[1.1] font-extrabold text-on-surface mb-6 tracking-tight stage-in" style="animation-delay: 0.16s;">
 Never ask <span class="text-primary underline decoration-tertiary-container underline-offset-4">"what should we play?"</span> again.
 </h1>
-<p class="text-lg text-on-surface-variant mb-10 max-w-lg leading-relaxed">
-A crowd-sourced library of social games — card games, drinking games, party favourites and hidden gems — every one submitted by someone who actually plays it. Describe the moment, get real answers, not a fixed deck someone wrote once.
+<p class="text-lg text-on-surface-variant mb-10 max-w-lg leading-relaxed stage-in" style="animation-delay: 0.3s;">
+A crowd-sourced library of social games: card games, drinking games, party favourites and hidden gems. Every one submitted by someone who actually plays it. Describe the moment, get real answers, not a fixed deck someone wrote once.
 </p>
-<form class="flex flex-col sm:flex-row gap-4 max-w-lg p-2 bg-surface-container rounded-xl border-2 border-on-surface shadow-[4px_4px_0px_0px_rgba(24,20,69,1)]" id="hero-form" onsubmit="handleSignup(event, 'hero')">
+<form class="flex flex-col sm:flex-row gap-4 max-w-lg p-2 bg-surface-container rounded-xl border-2 border-on-surface shadow-[4px_4px_0px_0px_rgba(24,20,69,1)] stage-in" style="animation-delay: 0.44s;" id="hero-form" onsubmit="handleSignup(event, 'hero')">
 <input class="flex-grow bg-transparent border-none focus:ring-0 text-on-surface font-medium px-4 py-3 placeholder:text-outline" placeholder="your@email.com" required type="email" autocomplete="email"/>
 <button class="bg-primary text-on-primary font-bold px-8 py-3 rounded-lg hover:bg-primary-container transition-colors whitespace-nowrap" type="submit" id="hero-btn">Notify me</button>
 </form>
 <div class="success-msg bg-tertiary-container border-2 border-on-surface rounded-xl px-5 py-3 text-on-tertiary-container font-medium max-w-lg" id="hero-success">
 🎉 You're on the list! We'll be in touch.
 </div>
-<p class="mt-4 text-sm text-outline">No spam, ever. Just a heads-up when we launch.</p>
+<p class="mt-4 text-sm text-outline stage-in" style="animation-delay: 0.55s;">No spam, ever. Just a heads-up when we launch.</p>
 </div>
 <div class="relative flex justify-center items-center">
-<div class="relative group">
+<div class="relative group logo-drop" style="animation-delay: 0.1s;">
 <img alt="What's That Game dice logo" class="w-full max-w-[450px] drop-shadow-[20px_20px_0px_rgba(99,14,212,0.1)] transition-transform duration-500 group-hover:scale-105 group-hover:rotate-2" src="assets/wtg-logo.png"/>
-<div class="absolute -top-4 -right-4 bg-on-surface text-white px-6 py-2 rounded-full font-bold shadow-xl border-2 border-on-surface floating-pill">🃏 Card Games</div>
-<div class="absolute bottom-10 -left-10 bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold shadow-xl border-2 border-on-surface floating-pill" style="animation-delay: -2s;">🎲 Dice Games</div>
-<div class="absolute top-1/2 -right-12 bg-secondary-container text-on-secondary-container px-6 py-2 rounded-full font-bold shadow-xl border-2 border-on-surface floating-pill" style="animation-delay: -4s;">🧠 Trivia</div>
+<div class="absolute -top-4 -right-4 bg-on-surface text-white px-6 py-2 rounded-full font-bold shadow-xl border-2 border-on-surface floating-pill" style="animation-delay: 0.7s, -2s;">🃏 Card Games</div>
+<div class="absolute bottom-10 -left-10 bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold shadow-xl border-2 border-on-surface floating-pill" style="animation-delay: 0.85s, -4s;">🎲 Dice Games</div>
+<div class="absolute top-1/2 -right-12 bg-secondary-container text-on-secondary-container px-6 py-2 rounded-full font-bold shadow-xl border-2 border-on-surface floating-pill" style="animation-delay: 1s, -1s;">🧠 Trivia</div>
 </div>
 </div>
 </div>
 </section>
 
-<div class="flex flex-wrap gap-3 justify-center py-4" id="game-type-pills">
+<div class="ticker-viewport overflow-hidden py-4" style="mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);">
+<div class="ticker-track" id="game-type-pills">
 <!-- filled from live category list, falls back to static list below -->
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">🃏 Card</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">🎲 Dice</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">🍺 Drinking</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">🧠 Trivia</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">💬 Word</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">🏃 Physical</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">♟️ Strategy</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">🕵️ Guessing</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">🎭 Acting</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">✍️ Drawing</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">🎵 Music</span>
-<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant">+ more</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">🃏 Card</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">🎲 Dice</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">🍺 Drinking</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">🧠 Trivia</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">💬 Word</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">🏃 Physical</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">♟️ Strategy</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">🕵️ Guessing</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">🎭 Acting</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">✍️ Drawing</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">🎵 Music</span>
+<span class="px-4 py-1 bg-surface-container-high rounded-full text-xs font-bold border border-outline-variant whitespace-nowrap">+ more</span>
+</div>
 </div>
 
 <!-- STATS -->
 <div class="grid grid-cols-3 gap-4 md:gap-6 py-8 max-w-4xl mx-auto">
-<div class="bg-surface-container-low bento-card rounded-xl p-4 md:p-6 text-center">
-<div class="text-2xl md:text-3xl font-black text-primary" id="stat-categories">12</div>
+<div class="bg-surface-container-low bento-card rounded-xl p-4 md:p-6 text-center reveal-up">
+<div class="text-2xl md:text-3xl font-black text-primary tabular-nums" id="stat-categories" data-count-target="12">0</div>
 <div class="text-xs md:text-sm text-on-surface-variant mt-1">Game categories</div>
 </div>
-<div class="bg-surface-container-low bento-card rounded-xl p-4 md:p-6 text-center">
-<div class="text-2xl md:text-3xl font-black text-primary" id="stat-game-count">49</div>
+<div class="bg-surface-container-low bento-card rounded-xl p-4 md:p-6 text-center reveal-up" style="transition-delay: 0.08s;">
+<div class="text-2xl md:text-3xl font-black text-primary tabular-nums" id="stat-game-count" data-count-target="49">0</div>
 <div class="text-xs md:text-sm text-on-surface-variant mt-1">Games in the library</div>
 </div>
-<div class="bg-surface-container-low bento-card rounded-xl p-4 md:p-6 text-center">
+<div class="bg-surface-container-low bento-card rounded-xl p-4 md:p-6 text-center reveal-up" style="transition-delay: 0.16s;">
 <div class="text-2xl md:text-3xl font-black text-primary">∞</div>
 <div class="text-xs md:text-sm text-on-surface-variant mt-1">Combinations to discover</div>
 </div>
@@ -219,37 +267,30 @@ A crowd-sourced library of social games — card games, drinking games, party fa
 <h3 class="text-xs font-bold tracking-[0.05em] uppercase text-primary">Not a content pack. A shared library.</h3>
 <div class="h-[2px] flex-grow bg-outline-variant ml-4 rounded-full opacity-30"></div>
 </div>
-<p class="text-on-surface-variant max-w-2xl mb-8 -mt-4">Most game apps ship a fixed deck someone wrote once. Every game here was submitted by a user who actually plays it — the library gets deeper the more people use it.</p>
+<p class="text-on-surface-variant max-w-2xl mb-8 -mt-4">Most game apps ship a fixed deck someone wrote once. Every game here was submitted by a user who actually plays it, and the library gets deeper the more people use it.</p>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 <div class="feature-card bg-surface-container border-2 border-on-surface p-6 rounded-xl flex flex-col gap-4">
 <div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center text-on-primary">
 <span class="material-symbols-outlined">search</span>
 </div>
 <h4 class="font-bold text-lg">Search by the moment, not a category</h4>
-<p class="text-sm text-on-surface-variant">Type it in plain language — "a quick card game for 4 people, no equipment" — and get real, ranked results.</p>
+<p class="text-sm text-on-surface-variant">Type it in plain language, like "a quick card game for 4 people, no equipment," and get real, ranked results.</p>
 </div>
 <div class="feature-card bg-white border-2 border-on-surface p-6 rounded-xl flex flex-col gap-4">
 <div class="w-12 h-12 bg-tertiary-container rounded-lg flex items-center justify-center text-on-tertiary-container">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
 </div>
-<h4 class="font-bold text-lg">AI-assisted contribution</h4>
-<p class="text-sm text-on-surface-variant">Dictate or type a rough description of a game you know. AI structures it into objective, setup and rules — no homework required.</p>
+<h4 class="font-bold text-lg">AI-vetted rules</h4>
+<p class="text-sm text-on-surface-variant">Dictate or type a rough description of a game you know, and our AI breaks it into the same structure every time: objective, setup, rules, difficulty, duration, player count.</p>
 </div>
 <div class="feature-card bg-primary text-on-primary p-6 rounded-xl flex flex-col gap-4">
 <div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center text-on-primary">
 <span class="material-symbols-outlined">groups</span>
 </div>
 <h4 class="font-bold text-lg">Built by the community</h4>
-<p class="text-sm opacity-90">Every game is submitted, upvoted and favourited by real players — comments and rule-variant suggestions included.</p>
+<p class="text-sm opacity-90">Every game is submitted, upvoted and favourited by real players, with comments and rule-variant suggestions included.</p>
 </div>
-<div class="feature-card bg-surface-container-highest border-2 border-on-surface p-6 rounded-xl flex flex-col gap-4">
-<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center text-on-secondary-container">
-<span class="material-symbols-outlined">rule</span>
-</div>
-<h4 class="font-bold text-lg">Consistent, accessible rules</h4>
-<p class="text-sm text-on-surface-variant">Every game — regardless of who wrote it — follows the same structure: objective, setup, rules, difficulty, duration, player count.</p>
-</div>
-<div class="feature-card bg-white border-2 border-on-surface p-6 rounded-xl flex flex-col gap-4 md:col-span-2">
+<div class="feature-card bg-white border-2 border-on-surface p-6 rounded-xl flex flex-col gap-4">
 <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-on-primary">
 <span class="material-symbols-outlined">verified_user</span>
 </div>
@@ -265,27 +306,27 @@ A crowd-sourced library of social games — card games, drinking games, party fa
 <p class="text-primary font-bold text-xs uppercase tracking-widest mb-3">How it works</p>
 <h3 class="text-2xl font-extrabold text-on-surface">From "what should we play?" to playing, in minutes</h3>
 </div>
-<div class="space-y-8 relative max-w-2xl mx-auto">
-<div class="absolute left-6 top-8 bottom-8 w-1 bg-on-surface opacity-10"></div>
-<div class="flex gap-6 relative">
+<div class="space-y-8 relative max-w-2xl mx-auto" id="how-it-works-steps">
+<div class="absolute left-6 w-1 bg-on-surface opacity-10" id="timeline-connector" aria-hidden="true" style="top:0;height:0;"></div>
+<div class="flex gap-6 relative reveal-up">
 <div class="z-10 w-12 h-12 flex-shrink-0 bg-primary text-on-primary rounded-full border-2 border-on-surface flex items-center justify-center font-bold text-xl">1</div>
 <div class="pt-1">
 <h4 class="font-bold text-lg">Tell us what you've got</h4>
 <p class="text-on-surface-variant">Set your player count, how long you want to play, and what equipment you have. We'll narrow it down.</p>
 </div>
 </div>
-<div class="flex gap-6 relative">
+<div class="flex gap-6 relative reveal-up" style="transition-delay: 0.1s;">
 <div class="z-10 w-12 h-12 flex-shrink-0 bg-white text-on-surface rounded-full border-2 border-on-surface flex items-center justify-center font-bold text-xl">2</div>
 <div class="pt-1">
 <h4 class="font-bold text-lg">Search or swipe through options</h4>
 <p class="text-on-surface-variant">Describe what you're after or browse game cards, swiping right on ones that catch your eye.</p>
 </div>
 </div>
-<div class="flex gap-6 relative">
+<div class="flex gap-6 relative reveal-up" style="transition-delay: 0.2s;">
 <div class="z-10 w-12 h-12 flex-shrink-0 bg-tertiary-container text-on-tertiary-container rounded-full border-2 border-on-surface flex items-center justify-center font-bold text-xl">3</div>
 <div class="pt-1">
 <h4 class="font-bold text-lg">Read the rules and play</h4>
-<p class="text-on-surface-variant">Every game comes with full setup instructions, rules and objective — everything you need to start immediately.</p>
+<p class="text-on-surface-variant">Every game comes with full setup instructions, rules and objective: everything you need to start immediately.</p>
 </div>
 </div>
 </div>
@@ -293,7 +334,7 @@ A crowd-sourced library of social games — card games, drinking games, party fa
 
 <!-- FINAL CTA -->
 <section class="py-16 text-center space-y-8" id="maillist">
-<div class="space-y-2">
+<div class="space-y-2 reveal-up">
 <h3 class="text-2xl md:text-[28px] font-extrabold leading-tight">The future of game night is almost here.</h3>
 <p class="text-on-surface-variant">We're putting the finishing touches on the app. Join the maillist and we'll let you know the moment it launches.</p>
 </div>
@@ -337,24 +378,21 @@ Partner With Us
 
 <script>
     const menuToggle = document.getElementById('menu-toggle');
-    const menuToggleIcon = document.getElementById('menu-toggle-icon');
     const mobileMenu = document.getElementById('mobile-menu');
 
     if (menuToggle) {
         menuToggle.addEventListener('click', () => {
-            const isHidden = mobileMenu.classList.contains('hidden');
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('flex');
-            menuToggle.setAttribute('aria-expanded', String(isHidden));
-            menuToggleIcon.textContent = isHidden ? 'close' : 'menu';
+            const isOpening = !mobileMenu.classList.contains('menu-open');
+            mobileMenu.classList.toggle('menu-open');
+            menuToggle.classList.toggle('menu-toggle-open', isOpening);
+            menuToggle.setAttribute('aria-expanded', String(isOpening));
         });
 
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
+                mobileMenu.classList.remove('menu-open');
+                menuToggle.classList.remove('menu-toggle-open');
                 menuToggle.setAttribute('aria-expanded', 'false');
-                menuToggleIcon.textContent = 'menu';
             });
         });
     }
@@ -370,19 +408,87 @@ Partner With Us
         });
     });
 
-    const cardObserver = new IntersectionObserver((entries) => {
+    // Scroll reveal — applies to every .reveal-up element site-wide (stats,
+    // how-it-works steps, final CTA) plus feature cards, with the same easing.
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('opacity-100', 'translate-y-0');
-                entry.target.classList.remove('opacity-0', 'translate-y-8');
+                entry.target.classList.add('in-view');
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.12 });
 
-    document.querySelectorAll('.feature-card').forEach(el => {
-        el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-8');
-        cardObserver.observe(el);
+    document.querySelectorAll('.feature-card, .reveal-up').forEach((el, i) => {
+        el.classList.add('reveal-up');
+        if (!el.style.animationDelay && el.classList.contains('feature-card')) {
+            el.style.animationDelay = (i * 0.08) + 's';
+        }
+        revealObserver.observe(el);
     });
+
+    // How-it-works timeline connector: measured from real circle positions
+    // (not a fixed offset) so it reaches exactly from circle 1 to circle 3
+    // regardless of how many lines the step text wraps to.
+    function positionTimelineLine() {
+        const container = document.getElementById('how-it-works-steps');
+        const line = document.getElementById('timeline-connector');
+        if (!container || !line) return;
+        const circles = container.querySelectorAll(':scope > .flex > .rounded-full');
+        if (circles.length < 2) return;
+        const containerTop = container.getBoundingClientRect().top;
+        const first = circles[0].getBoundingClientRect();
+        const last = circles[circles.length - 1].getBoundingClientRect();
+        const top = (first.top - containerTop) + first.height / 2;
+        const bottom = (last.top - containerTop) + last.height / 2;
+        line.style.top = top + 'px';
+        line.style.height = Math.max(0, bottom - top) + 'px';
+    }
+    window.addEventListener('load', positionTimelineLine);
+    window.addEventListener('resize', positionTimelineLine);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(positionTimelineLine);
+    }
+    // Catches anything load/resize/fonts.ready miss (e.g. a late web-font
+    // swap reflowing paragraph line-wraps after those already fired) —
+    // this is what actually keeps mobile correct, since font load timing
+    // there is the least predictable of the bunch.
+    if (typeof ResizeObserver !== 'undefined') {
+        const stepsEl = document.getElementById('how-it-works-steps');
+        if (stepsEl) new ResizeObserver(positionTimelineLine).observe(stepsEl);
+    }
+    positionTimelineLine();
+
+    // Category ticker: duplicate the pill list once so the CSS scroll loop
+    // (-50%) is seamless, then pause on hover/focus.
+    const tickerTrack = document.getElementById('game-type-pills');
+    if (tickerTrack) tickerTrack.innerHTML += tickerTrack.innerHTML;
+
+    // Stat count-up, once, when a stat scrolls into view.
+    function animateCount(el, target, fromCurrent) {
+        const start = fromCurrent ? (parseInt(el.textContent, 10) || 0) : 0;
+        const duration = 900;
+        const t0 = performance.now();
+        function tick(now) {
+            const p = Math.min(1, (now - t0) / duration);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(start + (target - start) * eased);
+            if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        el.dataset.animated = 'true';
+    }
+
+    const countObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            animateCount(el, parseInt(el.dataset.countTarget, 10), false);
+            countObserver.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-count-target]').forEach(el => countObserver.observe(el));
 
     function handleSignup(event, formId) {
         event.preventDefault();
@@ -402,13 +508,17 @@ Partner With Us
         })
             .then(res => res.ok ? res.json() : Promise.reject(res.status))
             .then(() => {
-                form.style.display = 'none';
-                successEl.style.display = 'block';
+                form.style.transition = 'opacity 150ms ease-out';
+                form.style.opacity = '0';
+                setTimeout(() => {
+                    form.style.display = 'none';
+                    successEl.classList.add('visible');
+                }, 150);
             })
             .catch(() => {
                 btn.disabled = false;
                 btn.textContent = originalBtnText;
-                alert("Couldn't sign you up — please try again in a moment.");
+                alert("Couldn't sign you up. Please try again in a moment.");
             });
     }
 
@@ -419,9 +529,13 @@ Partner With Us
     fetch('https://api.whatsthatgame.co.uk/games/count')
         .then(res => res.ok ? res.json() : Promise.reject(res.status))
         .then(data => {
-            if (typeof data.count === 'number') gameCountEl.textContent = data.count;
+            if (typeof data.count !== 'number') return;
+            gameCountEl.dataset.countTarget = data.count;
+            // if the count-up already ran (stat was in view before this
+            // resolved), re-animate from whatever's on screen to the live figure
+            if (gameCountEl.dataset.animated === 'true') animateCount(gameCountEl, data.count, true);
         })
-        .catch(() => { /* keep static fallback */ });
+        .catch(() => { /* keep static fallback already in data-count-target */ });
 </script>
 </body>
 </html>

@@ -1,435 +1,819 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Terms of Use | What's That Game?</title>
-<link rel="icon" type="image/png" href="assets/favicon.png"/>
-<meta name="description" content="Terms of Use / EULA for the What's That Game app: acceptance, accounts, user-generated content, our zero-tolerance policy for objectionable content and abusive users, and more." />
-<style>
-    :root {
-        --primary: #630ed4;
-        --primary-container: #7c3aed;
-        --on-primary: #ffffff;
-        --on-primary-container: #ede0ff;
-        --secondary-container: #e9def5;
-        --on-secondary-container: #4a4456;
-        --danger-container: #fde2e2;
-        --on-danger-container: #7a1a1a;
-        --danger: #c81e1e;
-        --surface: #fcf8ff;
-        --surface-container-lowest: #ffffff;
-        --surface-container-low: #f6f2ff;
-        --surface-container: #efebff;
-        --surface-container-high: #e9e5ff;
-        --on-surface: #181445;
-        --on-surface-variant: #4a4455;
-        --outline: #7b7487;
-        --outline-variant: #ccc3d8;
-    }
-    * { box-sizing: border-box; }
-    body {
-        margin: 0;
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        background: var(--surface);
-        color: var(--on-surface);
-    }
-    a { color: inherit; }
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: var(--surface-container-low); }
-    ::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--outline); }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms of Use | What's That Game?</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <meta
+      name="description"
+      content="Terms of Use / EULA for the What's That Game app: acceptance, accounts, user-generated content, our zero-tolerance policy for objectionable content and abusive users, and more."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#630ed4",
+              "primary-container": "#7c3aed",
+              "on-primary": "#ffffff",
+              "on-primary-container": "#ede0ff",
+              "secondary-container": "#e9def5",
+              "on-secondary-container": "#4a4456",
+              "tertiary-container": "#fff3d6",
+              "on-tertiary-container": "#5c4300",
+              error: "#ba1a1a",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              surface: "#fcf8ff",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-low": "#f6f2ff",
+              "surface-container": "#efebff",
+              "surface-container-high": "#e9e5ff",
+              "surface-container-highest": "#e3dfff",
+              "on-surface": "#181445",
+              "on-surface-variant": "#4a4455",
+              outline: "#7b7487",
+              "outline-variant": "#ccc3d8",
+            },
+            fontFamily: {
+              sans: ["Plus Jakarta Sans", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+      .prose-section p {
+        line-height: 1.75;
+      }
+      .prose-section h3 {
+        font-weight: 800;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .prose-section ul {
+        list-style: disc;
+        padding-left: 1.25rem;
+      }
+      .prose-section li {
+        margin-bottom: 0.35rem;
+        line-height: 1.7;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f6f2ff;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ccc3d8;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #7b7487;
+      }
 
-    /* Header */
-    header {
-        width: 100%;
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        background: var(--surface);
-        border-bottom: 2px solid var(--outline-variant);
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    }
-    .header-inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 1.5rem;
-        max-width: 1280px;
-        margin: 0 auto;
-    }
-    .brand { font-size: 1.5rem; font-weight: 900; color: var(--primary-container); text-decoration: none; letter-spacing: -0.02em; }
-    nav.main-nav { display: none; gap: 2rem; align-items: center; }
-    nav.main-nav a { color: var(--on-surface-variant); text-decoration: none; font-weight: 500; padding-bottom: 2px; }
-    nav.main-nav a:hover { color: var(--primary-container); }
-    nav.main-nav a.active { color: var(--primary-container); font-weight: 700; border-bottom: 2px solid var(--primary-container); }
-    .header-actions { display: none; align-items: center; gap: 1rem; }
-    .cta-btn {
-        background: var(--primary-container);
-        color: var(--on-primary);
-        font-weight: 700;
-        padding: 0.5rem 1.25rem;
-        border-radius: 0.5rem;
-        text-decoration: none;
-        box-shadow: 0 4px 10px rgba(124,58,237,0.25);
-    }
-    #menu-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: none;
-        border: none;
-        color: var(--primary-container);
-        cursor: pointer;
-        font-size: 1.5rem;
-        line-height: 1;
-    }
-    #mobile-menu { display: none; flex-direction: column; border-top: 2px solid var(--outline-variant); background: var(--surface); }
-    #mobile-menu.open { display: flex; }
-    #mobile-menu a { padding: 0.75rem 1.5rem; color: var(--on-surface-variant); text-decoration: none; font-weight: 500; }
-    #mobile-menu a.active { color: var(--primary-container); font-weight: 700; background: var(--surface-container-low); }
-    #mobile-menu a.cta-btn { margin: 0.5rem 1.5rem; text-align: center; }
-    @media (min-width: 768px) {
-        nav.main-nav { display: flex; }
-        .header-actions { display: flex; }
-        #menu-toggle { display: none; }
-        #mobile-menu { display: none !important; }
-    }
+      /* light touch only — this is a document people read/skim in full, so no
+       per-section scroll-triggered animation, just a one-shot hero entrance */
+      .stage-in {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: stageIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      @keyframes stageIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-    /* Main */
-    main { width: 100%; max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
-    .hero { margin-bottom: 2.5rem; }
-    .hero h1 { font-size: 32px; font-weight: 800; line-height: 1.15; margin: 0 0 0.5rem; }
-    .hero p { color: var(--on-surface-variant); font-weight: 500; margin: 0; }
-    @media (min-width: 768px) { .hero h1 { font-size: 44px; } }
+      /* mobile nav collapse — grows from the trigger instead of teleporting */
+      #mobile-menu {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 380ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 280ms ease-out;
+      }
+      #mobile-menu.menu-open {
+        max-height: 380px;
+        opacity: 1;
+      }
 
-    /* TOC */
-    .toc-wrap { margin-bottom: 3.5rem; }
-    .toc-box { background: var(--surface-container-low); border: 2px solid rgba(124,58,237,0.2); border-radius: 0.75rem; padding: 1rem; }
-    #toc-toggle {
-        display: flex; align-items: center; justify-content: space-between; width: 100%;
-        background: none; border: none; color: var(--primary-container); font-weight: 700; font-size: 1rem;
-        cursor: pointer; padding: 0.25rem 0;
-    }
-    #toc-toggle .chev { transition: transform 0.2s ease; }
-    #toc-toggle .chev.open { transform: rotate(180deg); }
-    #toc-content { margin-top: 0; }
-    #toc-content.hidden { display: none; }
-    .toc-label { color: var(--on-surface-variant); margin: 0 0 1rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; font-weight: 700; display: none; }
-    .toc-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 0.5rem 2rem; font-size: 14px; }
-    .toc-list a { color: var(--on-surface-variant); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
-    .toc-list a:hover { color: var(--primary-container); }
-    .toc-list .num { font-weight: 700; color: rgba(124,58,237,0.4); }
-    @media (min-width: 768px) {
-        .toc-box { padding: 1.5rem; }
-        #toc-toggle { display: none; }
-        #toc-content { display: block !important; margin-top: 0; }
-        .toc-label { display: block; }
-        .toc-list { grid-template-columns: 1fr 1fr; }
-    }
+      /* TOC accordion — max-height over grid-rows for real-device animation reliability (see mobile nav comment above) */
+      #toc-content {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 300ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 200ms ease-out;
+      }
+      #toc-content .toc-content-inner {
+        padding-top: 1rem;
+      }
+      @media (min-width: 768px) {
+        #toc-content .toc-content-inner {
+          padding-top: 0;
+        }
+      }
+      #toc-content.toc-open {
+        max-height: 600px;
+        opacity: 1;
+      }
+      @media (min-width: 768px) {
+        #toc-content {
+          max-height: none !important;
+          opacity: 1 !important;
+          overflow: visible;
+        }
+      }
 
-    /* Article / sections */
-    article { display: flex; flex-direction: column; gap: 4rem; }
-    section p { line-height: 1.75; margin: 0 0 1rem; }
-    section h3 { font-weight: 800; margin: 1.5rem 0 0.5rem; }
-    section ul { list-style: disc; padding-left: 1.25rem; margin: 0 0 1rem; }
-    section li { margin-bottom: 0.4rem; line-height: 1.7; }
-    .sec-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
-    .icon-box {
-        width: 2.5rem; height: 2.5rem; flex-shrink: 0; border-radius: 0.5rem;
-        display: flex; align-items: center; justify-content: center;
-        background: rgba(124,58,237,0.1); color: var(--primary-container);
-        font-weight: 800; font-size: 1.05rem;
-    }
-    .sec-head h2 { font-size: 1.5rem; font-weight: 800; margin: 0; }
+      /* hamburger → X morph */
+      .hamburger-bars { position: relative; width: 20px; height: 14px; display: inline-block; }
+      .hamburger-bar { position: absolute; left: 0; width: 100%; height: 2px; border-radius: 1px; background: currentColor; transition: transform 380ms cubic-bezier(0.16,1,0.3,1), opacity 260ms ease-out, top 380ms cubic-bezier(0.16,1,0.3,1); }
+      .hamburger-bar:nth-child(1) { top: 0; }
+      .hamburger-bar:nth-child(2) { top: 6px; }
+      .hamburger-bar:nth-child(3) { top: 12px; }
+      #menu-toggle.menu-toggle-open .hamburger-bar:nth-child(1) { top: 6px; transform: rotate(45deg); }
+      #menu-toggle.menu-toggle-open .hamburger-bar:nth-child(2) { opacity: 0; }
+      #menu-toggle.menu-toggle-open .hamburger-bar:nth-child(3) { top: 6px; transform: rotate(-45deg); }
 
-    .callout {
-        margin-top: 1.5rem; border-radius: 0.75rem; padding: 1.5rem;
-        background: var(--secondary-container); color: var(--on-secondary-container);
-        display: flex; gap: 1rem; align-items: flex-start;
-    }
-    .callout .dot { flex-shrink: 0; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--primary-container); margin-top: 0.5rem; }
-    .callout p { margin: 0; font-weight: 500; }
+      @media (prefers-reduced-motion: reduce) {
+        .stage-in {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        #mobile-menu,
+        #toc-content {
+          transition: none !important;
+        }
+        .hamburger-bar { transition: none !important; }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <!-- NAV -->
+    <header
+      class="w-full sticky top-0 z-50 bg-surface border-b-2 border-outline-variant shadow-sm"
+    >
+      <div
+        class="flex justify-between items-center h-[72px] px-6 max-w-7xl mx-auto"
+      >
+        <a href="/" class="text-2xl font-black text-primary tracking-tight"
+          >What's That Game?</a
+        >
+        <nav class="hidden md:flex gap-8 items-center">
+          <a
+            class="text-on-surface-variant hover:text-primary transition-colors font-medium"
+            href="/"
+            >Home</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary transition-colors font-medium"
+            href="/business"
+            >Business Portal</a
+          >
+          <a
+            class="text-primary font-medium border-b-2 border-primary"
+            href="/terms"
+            >Terms</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary transition-colors font-medium"
+            href="/privacy"
+            >Privacy</a
+          >
+        </nav>
+        <div class="hidden md:flex items-center gap-4">
+          <div class="flex items-center gap-3">
+            <span
+              class="flex items-center gap-1.5 text-outline font-bold px-3 py-2 rounded-lg text-sm cursor-default"
+              title="Coming soon"
+            >
+              <svg
+                class="inline-block w-[1.1em] h-[1.1em] align-[-0.15em]"
+                viewBox="0 0 384 512"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+                />
+              </svg>
+              App Store <span class="font-normal text-xs">(soon)</span>
+            </span>
+            <span
+              class="flex items-center gap-1.5 text-outline font-bold px-3 py-2 rounded-lg text-sm cursor-default"
+              title="Coming soon"
+            >
+              <span class="material-symbols-outlined text-lg">android</span>
+              Google Play <span class="font-normal text-xs">(soon)</span>
+            </span>
+          </div>
+          <a
+            href="/business#contact"
+            class="bg-primary text-on-primary font-bold px-5 py-2 rounded-lg shadow-lg hover:scale-105 active:scale-95 transition-all"
+            >Get in Touch</a
+          >
+        </div>
+        <button
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          aria-label="Toggle menu"
+          class="md:hidden flex items-center justify-center w-10 h-10 text-primary"
+          id="menu-toggle"
+        >
+          <span class="hamburger-bars" aria-hidden="true"
+            ><span class="hamburger-bar"></span
+            ><span class="hamburger-bar"></span
+            ><span class="hamburger-bar"></span
+          ></span>
+        </button>
+      </div>
+      <nav
+        class="md:hidden border-t-2 border-outline-variant bg-surface"
+        id="mobile-menu"
+      >
+        <div class="flex flex-col mobile-menu-inner">
+          <a
+            class="px-6 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors font-medium"
+            href="/"
+            >Home</a
+          >
+          <a
+            class="px-6 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors font-medium"
+            href="/business"
+            >Business Portal</a
+          >
+          <a
+            class="px-6 py-3 text-primary font-bold bg-surface-container-low"
+            href="/terms"
+            >Terms</a
+          >
+          <a
+            class="px-6 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors font-medium"
+            href="/privacy"
+            >Privacy</a
+          >
+          <span
+            class="px-6 py-3 text-outline font-medium flex items-center gap-2 cursor-default"
+            ><svg
+              class="inline-block w-[1.1em] h-[1.1em] align-[-0.15em]"
+              viewBox="0 0 384 512"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+              />
+            </svg>
+            App Store <span class="text-xs">(soon)</span></span
+          >
+          <span
+            class="px-6 py-3 text-outline font-medium flex items-center gap-2 cursor-default"
+            ><span class="material-symbols-outlined text-lg">android</span>
+            Google Play <span class="text-xs">(soon)</span></span
+          >
+          <a
+            class="mx-6 my-2 px-6 py-3 bg-primary text-on-primary font-bold text-center rounded-lg"
+            href="/business#contact"
+            >Get in Touch</a
+          >
+        </div>
+      </nav>
+    </header>
 
-    .danger-box {
-        border: 2px solid var(--danger); background: var(--danger-container); color: var(--on-danger-container);
-        border-radius: 0.75rem; padding: 1.5rem; margin: 1.5rem 0;
-    }
-    .danger-box .tag {
-        display: inline-block; background: var(--danger); color: #fff; font-weight: 800; font-size: 12px;
-        letter-spacing: 0.05em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 999px; margin-bottom: 0.75rem;
-    }
-    .danger-box ul { padding-left: 1.25rem; }
-    .danger-box li { margin-bottom: 0.6rem; }
-    .danger-box strong { color: var(--on-danger-container); }
+    <main class="w-full max-w-[900px] mx-auto px-6 py-12">
+      <!-- Hero -->
+      <div class="mb-10">
+        <h1
+          class="text-[32px] md:text-[44px] font-[800] leading-tight text-on-surface mb-2 stage-in"
+        >
+          Terms of Use
+        </h1>
+        <p
+          class="text-on-surface-variant font-medium stage-in"
+          style="animation-delay: 0.1s"
+        >
+          Last updated: 16 August 2026 · Applies to the What's That Game mobile
+          app (iOS and Android), operated by the What's That Game team.
+        </p>
+      </div>
 
-    .quote-block { border-left: 4px solid var(--primary-container); background: var(--surface-container); border-radius: 0.75rem; padding: 1.25rem 1.5rem; }
+      <!-- Table of Contents -->
+      <div class="mb-14">
+        <div
+          class="bg-surface-container-low border-2 border-primary/20 rounded-xl p-4 md:p-6"
+        >
+          <button
+            class="flex items-center justify-between w-full md:hidden text-primary font-bold"
+            id="toc-toggle"
+          >
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined">list</span>
+              Table of Contents
+            </span>
+            <span
+              class="material-symbols-outlined transition-transform"
+              id="toc-chevron"
+              >expand_more</span
+            >
+          </button>
+          <nav id="toc-content">
+            <div class="toc-content-inner">
+              <h2
+                class="hidden md:block text-on-surface-variant mb-4 uppercase tracking-widest text-[12px] font-bold"
+              >
+                Quick Navigation
+              </h2>
+              <ul
+                class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-8 text-[14px]"
+              >
+                <li>
+                  <a
+                    class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                    href="#acceptance"
+                    ><span class="font-bold text-primary/40">01</span>
+                    Acceptance of terms</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                    href="#eligibility"
+                    ><span class="font-bold text-primary/40">02</span>
+                    Eligibility</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                    href="#account"
+                    ><span class="font-bold text-primary/40">03</span> Your
+                    account</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                    href="#content"
+                    ><span class="font-bold text-primary/40">04</span>
+                    User-generated content</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                    href="#zero-tolerance"
+                    ><span class="font-bold text-primary/40">05</span>
+                    Zero-tolerance policy</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                    href="#prohibited"
+                    ><span class="font-bold text-primary/40">06</span>
+                    Prohibited conduct</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                    href="#ip"
+                    ><span class="font-bold text-primary/40">07</span>
+                    Intellectual property</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                    href="#disclaimers"
+                    ><span class="font-bold text-primary/40">08</span>
+                    Disclaimers &amp; liability</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                    href="#changes"
+                    ><span class="font-bold text-primary/40">09</span> Changes
+                    to these terms</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                    href="#contact"
+                    ><span class="font-bold text-primary/40">10</span>
+                    Contact</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
 
-    .contact-card { display: flex; flex-direction: column; gap: 1rem; }
-    .contact-btn {
-        display: inline-flex; align-items: center; gap: 0.6rem; align-self: flex-start;
-        background: var(--primary-container); color: var(--on-primary); padding: 0.75rem 1.5rem;
-        border-radius: 999px; font-weight: 700; text-decoration: none;
-    }
-    .contact-btn:hover { box-shadow: 0 6px 16px rgba(124,58,237,0.3); }
+      <article class="prose-section space-y-16">
+        <section id="acceptance">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+            >
+              <span class="material-symbols-outlined">gavel</span>
+            </div>
+            <h2 class="text-2xl font-extrabold">1. Acceptance of terms</h2>
+          </div>
+          <p>
+            These Terms of Use ("Terms") are a legal agreement between you and
+            <strong>What's That Game</strong> ("WTG", "we", "us", "our") — an
+            independent project run by its founding team — governing your access
+            to and use of the What's That Game mobile app and related services
+            (the "App").
+          </p>
+          <p>
+            By downloading, installing, accessing, or using the App, or by
+            creating an account, you agree to be bound by these Terms. If you do
+            not agree, do not use the App.
+          </p>
+        </section>
 
-    /* Footer */
-    footer { width: 100%; padding: 3rem 0; background: var(--surface-container); border-top: 2px solid var(--outline-variant); }
-    .footer-inner {
-        display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 1.5rem;
-        padding: 0 1.5rem; max-width: 1280px; margin: 0 auto; text-align: center;
-    }
-    .footer-brand { font-size: 1.25rem; font-weight: 700; color: var(--on-surface); text-decoration: none; }
-    .footer-tag { color: var(--on-surface-variant); opacity: 0.8; margin: 0; }
-    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
-    .footer-links a { color: var(--on-surface-variant); text-decoration: underline; }
-    .footer-links a:hover { color: var(--primary-container); }
-    .footer-links a.current { color: var(--primary-container); }
-    .footer-bottom { max-width: 1280px; margin: 2rem auto 0; padding: 2rem 1.5rem 0; border-top: 1px solid rgba(204,195,216,0.3); text-align: center; }
-    .footer-bottom p { color: var(--on-surface-variant); opacity: 0.6; font-size: 0.875rem; margin: 0; }
-    @media (min-width: 768px) {
-        .footer-inner { flex-direction: row; text-align: left; }
-    }
-</style>
-</head>
-<body>
+        <section id="eligibility">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+            >
+              <span class="material-symbols-outlined">how_to_reg</span>
+            </div>
+            <h2 class="text-2xl font-extrabold">2. Eligibility</h2>
+          </div>
+          <p>
+            You must be at least <strong>13 years old</strong> to create an
+            account or use the App. If you are under the age of majority in your
+            country, you may only use the App with the involvement of a parent
+            or guardian, where required by local law.
+          </p>
+          <p>
+            When you register, you agree to provide accurate, current, and
+            complete information, and to keep that information up to date. You
+            may not impersonate another person or create an account for anyone
+            other than yourself.
+          </p>
+        </section>
 
-<!-- NAV -->
-<header>
-<div class="header-inner">
-<a href="/" class="brand">What's That Game?</a>
-<nav class="main-nav">
-<a href="/">Home</a>
-<a href="/business">Business Portal</a>
-<a href="/privacy">Privacy Policy</a>
-<a href="/terms" class="active">Terms of Use</a>
-</nav>
-<div class="header-actions">
-<a href="/business#contact" class="cta-btn">Get in Touch</a>
-</div>
-<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" id="menu-toggle">&#9776;</button>
-</div>
-<nav id="mobile-menu">
-<a href="/">Home</a>
-<a href="/business">Business Portal</a>
-<a href="/privacy">Privacy Policy</a>
-<a href="/terms" class="active">Terms of Use</a>
-<a href="/business#contact" class="cta-btn">Get in Touch</a>
-</nav>
-</header>
+        <section id="account">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+            >
+              <span class="material-symbols-outlined">person</span>
+            </div>
+            <h2 class="text-2xl font-extrabold">3. Your account</h2>
+          </div>
+          <p>
+            You are responsible for maintaining the confidentiality of your
+            account credentials (including any password, or your Google sign-in)
+            and for all activity that occurs under your account. Notify us
+            promptly if you suspect unauthorised access to your account.
+          </p>
+          <p>
+            You can delete your account at any time from within the App.
+            Deletion follows the process described in our
+            <a class="text-primary underline" href="/privacy">Privacy Policy</a
+            >, including a short recovery window before your data is permanently
+            erased.
+          </p>
+        </section>
 
-<main>
+        <section id="content">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+            >
+              <span class="material-symbols-outlined">edit_note</span>
+            </div>
+            <h2 class="text-2xl font-extrabold">4. User-generated content</h2>
+          </div>
+          <p>
+            The App lets you submit games, descriptions, photos, comments, and
+            other content to a shared community catalogue ("User Content"). You
+            retain ownership of any User Content you submit.
+          </p>
+          <p>
+            By submitting User Content, you grant WTG a worldwide,
+            non-exclusive, royalty-free, sublicensable licence to host, store,
+            reproduce, display, distribute, adapt, and otherwise use that User
+            Content within the App and in connection with operating, promoting,
+            and improving the App, for as long as the content remains on the
+            platform (and, where content is retained anonymously after account
+            deletion, as described in our Privacy Policy).
+          </p>
+          <p>
+            You confirm that you own or have the necessary rights to any User
+            Content you submit, and that it does not infringe the rights of any
+            third party.
+          </p>
+        </section>
 
-<div class="hero">
-<h1>Terms of Use</h1>
-<p>Last updated: 11 August 2026 · Applies to the What's That Game mobile app (iOS and Android), operated by WTG Ltd.</p>
-</div>
+        <section id="zero-tolerance">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-error-container flex items-center justify-center text-error"
+            >
+              <span class="material-symbols-outlined">shield</span>
+            </div>
+            <h2 class="text-2xl font-extrabold">
+              5. Zero-tolerance policy for objectionable content &amp; abusive
+              behaviour
+            </h2>
+          </div>
+          <div
+            class="border-2 border-error bg-error-container text-on-error-container rounded-xl p-6"
+          >
+            <span
+              class="inline-block bg-error text-on-error font-extrabold text-xs uppercase tracking-wider px-3 py-1 rounded-full mb-3"
+              >Zero tolerance</span
+            >
+            <p class="font-bold">
+              WTG has zero tolerance for objectionable, offensive, illegal,
+              infringing, hateful, sexually explicit, or otherwise abusive
+              content, and for abusive users.
+            </p>
+            <p>
+              This applies to every part of the App, including games,
+              descriptions, photos, comments, usernames, and any other content
+              or conduct on the platform.
+            </p>
+            <ul class="list-disc pl-5 mt-3 space-y-2">
+              <li>
+                <strong>Moderation before publication:</strong> content
+                submitted to the App (including games, descriptions, and photos)
+                is subject to review and must be approved by our moderation
+                systems and/or admin team before it is made publicly visible.
+              </li>
+              <li>
+                <strong>In-app reporting:</strong> you can report objectionable
+                content or abusive behaviour directly within the App at any
+                time. Reports are reviewed by our team and acted on, typically
+                within <strong>24 hours</strong>.
+              </li>
+              <li>
+                <strong>Enforcement:</strong> WTG may, at its sole discretion
+                and without prior notice, remove or reject any content, and
+                suspend or permanently terminate the account of any user who
+                violates this policy or these Terms.
+              </li>
+            </ul>
+          </div>
+          <p class="mt-4">
+            If you encounter content or behaviour that you believe violates this
+            policy, please report it in-app immediately, or contact us using the
+            details in Section 10.
+          </p>
+        </section>
 
-<div class="toc-wrap">
-<div class="toc-box">
-<button id="toc-toggle">
-<span>&#9776; Table of Contents</span>
-<span class="chev" id="toc-chevron">&#9660;</span>
-</button>
-<div id="toc-content" class="hidden">
-<p class="toc-label">Quick Navigation</p>
-<ul class="toc-list">
-<li><a href="#acceptance"><span class="num">01</span> Acceptance of terms</a></li>
-<li><a href="#eligibility"><span class="num">02</span> Eligibility</a></li>
-<li><a href="#account"><span class="num">03</span> Your account</a></li>
-<li><a href="#content"><span class="num">04</span> User-generated content</a></li>
-<li><a href="#zero-tolerance"><span class="num">05</span> Zero-tolerance policy</a></li>
-<li><a href="#prohibited"><span class="num">06</span> Prohibited conduct</a></li>
-<li><a href="#ip"><span class="num">07</span> Intellectual property</a></li>
-<li><a href="#disclaimers"><span class="num">08</span> Disclaimers &amp; liability</a></li>
-<li><a href="#changes"><span class="num">09</span> Changes to these terms</a></li>
-<li><a href="#contact"><span class="num">10</span> Contact</a></li>
-</ul>
-</div>
-</div>
-</div>
+        <section id="prohibited">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+            >
+              <span class="material-symbols-outlined">block</span>
+            </div>
+            <h2 class="text-2xl font-extrabold">6. Prohibited conduct</h2>
+          </div>
+          <p>
+            In addition to the zero-tolerance policy above, when using the App
+            you must not:
+          </p>
+          <ul>
+            <li>
+              Submit or share content that infringes copyright, trademark, or
+              other intellectual property rights;
+            </li>
+            <li>Harass, threaten, bully, or abuse other users;</li>
+            <li>
+              Submit, upload, or share illegal content, or use the App for any
+              unlawful purpose;
+            </li>
+            <li>
+              Send spam, unsolicited advertising, or engage in other
+              manipulative or deceptive practices;
+            </li>
+            <li>
+              Attempt to break, disrupt, reverse-engineer, or otherwise abuse
+              the App, its infrastructure, or its security measures.
+            </li>
+          </ul>
+        </section>
 
-<article>
+        <section id="ip">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+            >
+              <span class="material-symbols-outlined">copyright</span>
+            </div>
+            <h2 class="text-2xl font-extrabold">7. Intellectual property</h2>
+          </div>
+          <p>
+            Except for User Content, the App and all associated content,
+            features, functionality, branding, logos, and trademarks are owned
+            by What's That Game or its licensors, and are protected by
+            copyright, trademark, and other intellectual property laws. You may
+            not copy, modify, distribute, or create derivative works from the
+            App or its branding without our prior written permission.
+          </p>
+        </section>
 
-<section id="acceptance">
-<div class="sec-head">
-<div class="icon-box">1</div>
-<h2>Acceptance of terms</h2>
-</div>
-<p>These Terms of Use ("Terms") are a legal agreement between you and <strong>WTG Ltd</strong> ("WTG", "we", "us", "our"), governing your access to and use of the What's That Game mobile app and related services (the "App").</p>
-<p>By downloading, installing, accessing, or using the App, or by creating an account, you agree to be bound by these Terms. If you do not agree, do not use the App.</p>
-</section>
+        <section id="disclaimers">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+            >
+              <span class="material-symbols-outlined">balance</span>
+            </div>
+            <h2 class="text-2xl font-extrabold">
+              8. Disclaimers &amp; limitation of liability
+            </h2>
+          </div>
+          <p>
+            The App is provided <strong>"as is"</strong> and
+            <strong>"as available"</strong>, without warranties of any kind,
+            whether express or implied, including (to the fullest extent
+            permitted by law) warranties of merchantability, fitness for a
+            particular purpose, and non-infringement. We do not guarantee that
+            the App will be uninterrupted, error-free, or that any User Content
+            is accurate.
+          </p>
+          <p>
+            To the fullest extent permitted by law, WTG shall not be liable for
+            any indirect, incidental, special, consequential, or punitive
+            damages, or any loss of data, arising from or related to your use of
+            the App. Nothing in these Terms excludes or limits liability that
+            cannot be excluded or limited under applicable law.
+          </p>
+          <div
+            class="bg-surface-container rounded-xl p-6 border-2 border-primary/20 mt-4"
+          >
+            <p class="m-0">
+              These Terms are governed by the laws of
+              <strong>England and Wales</strong>, and any disputes arising from
+              them will be subject to the exclusive jurisdiction of the courts
+              of England and Wales.
+            </p>
+          </div>
+        </section>
 
-<section id="eligibility">
-<div class="sec-head">
-<div class="icon-box">2</div>
-<h2>Eligibility</h2>
-</div>
-<p>You must be at least <strong>13 years old</strong> to create an account or use the App. If you are under the age of majority in your country, you may only use the App with the involvement of a parent or guardian, where required by local law.</p>
-<p>When you register, you agree to provide accurate, current, and complete information, and to keep that information up to date. You may not impersonate another person or create an account for anyone other than yourself.</p>
-</section>
+        <section id="changes">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+            >
+              <span class="material-symbols-outlined">update</span>
+            </div>
+            <h2 class="text-2xl font-extrabold">9. Changes to these terms</h2>
+          </div>
+          <p>
+            We may update these Terms from time to time. We will post the
+            revised version with an updated "Last updated" date and, for
+            material changes, notify you in the App. Continuing to use the App
+            after changes take effect means you accept the updated Terms.
+          </p>
+        </section>
 
-<section id="account">
-<div class="sec-head">
-<div class="icon-box">3</div>
-<h2>Your account</h2>
-</div>
-<p>You are responsible for maintaining the confidentiality of your account credentials (including any password, or your Google/Apple sign-in) and for all activity that occurs under your account. Notify us promptly if you suspect unauthorised access to your account.</p>
-<p>You can delete your account at any time from within the App. Deletion follows the process described in our <a href="/privacy" style="color: var(--primary-container); text-decoration: underline;">Privacy Policy</a>, including a short recovery window before your data is permanently erased.</p>
-</section>
+        <section id="contact">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+            >
+              <span class="material-symbols-outlined">alternate_email</span>
+            </div>
+            <h2 class="text-2xl font-extrabold">10. Contact</h2>
+          </div>
+          <p class="mb-4">
+            Questions about these Terms, or want to report something? Use the
+            <strong>Feedback</strong> screen inside the App, or reach us
+            directly — The What's That Game team.
+          </p>
+          <a
+            class="inline-flex items-center gap-3 bg-primary text-on-primary px-6 py-3 rounded-full font-bold hover:shadow-lg transition-all"
+            href="mailto:hello@whatsthatgame.info"
+          >
+            <span class="material-symbols-outlined">mail</span>
+            hello@whatsthatgame.info
+          </a>
+        </section>
+      </article>
+    </main>
 
-<section id="content">
-<div class="sec-head">
-<div class="icon-box">4</div>
-<h2>User-generated content</h2>
-</div>
-<p>The App lets you submit games, descriptions, photos, comments, and other content to a shared community catalogue ("User Content"). You retain ownership of any User Content you submit.</p>
-<p>By submitting User Content, you grant WTG a worldwide, non-exclusive, royalty-free, sublicensable licence to host, store, reproduce, display, distribute, adapt, and otherwise use that User Content within the App and in connection with operating, promoting, and improving the App, for as long as the content remains on the platform (and, where content is retained anonymously after account deletion, as described in our Privacy Policy).</p>
-<p>You confirm that you own or have the necessary rights to any User Content you submit, and that it does not infringe the rights of any third party.</p>
-</section>
+    <!-- FOOTER -->
+    <footer
+      class="w-full py-12 bg-surface-container border-t-2 border-outline-variant"
+    >
+      <div
+        class="flex flex-col md:flex-row items-center justify-between gap-6 px-6 max-w-7xl mx-auto"
+      >
+        <div class="text-xl font-bold text-on-surface">What's That Game?</div>
+        <p class="text-on-surface-variant opacity-80 text-center">
+          Solving the world's most annoying question, one game night at a time.
+        </p>
+        <div class="flex gap-6">
+          <a
+            class="text-on-surface-variant hover:text-primary underline"
+            href="mailto:hello@whatsthatgame.info"
+            >Contact</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary underline"
+            href="/business"
+            >Business Portal</a
+          >
+          <a class="text-primary underline" href="/terms">Terms of Use</a>
+        </div>
+      </div>
+      <div
+        class="max-w-7xl mx-auto px-6 mt-8 pt-8 border-t border-outline-variant/30 text-center"
+      >
+        <p class="text-on-surface-variant opacity-60 text-sm">
+          © 2026 What's That Game? All rights reserved.
+        </p>
+      </div>
+    </footer>
 
-<section id="zero-tolerance">
-<div class="sec-head">
-<div class="icon-box" style="background: var(--danger-container); color: var(--danger);">5</div>
-<h2>Zero-tolerance policy for objectionable content &amp; abusive behaviour</h2>
-</div>
-<div class="danger-box">
-<span class="tag">Zero tolerance</span>
-<p><strong>WTG has zero tolerance for objectionable, offensive, illegal, infringing, hateful, sexually explicit, or otherwise abusive content, and for abusive users.</strong> This applies to every part of the App, including games, descriptions, photos, comments, usernames, and any other content or conduct on the platform.</p>
-<ul>
-<li><strong>Moderation before publication:</strong> content submitted to the App (including games, descriptions, and photos) is subject to review and must be approved by our moderation systems and/or admin team before it is made publicly visible.</li>
-<li><strong>In-app reporting:</strong> you can report objectionable content or abusive behaviour directly within the App at any time. Reports are reviewed by our team and acted on, typically within <strong>24 hours</strong>.</li>
-<li><strong>Enforcement:</strong> WTG may, at its sole discretion and without prior notice, remove or reject any content, and suspend or permanently terminate the account of any user who violates this policy or these Terms.</li>
-</ul>
-</div>
-<p>If you encounter content or behaviour that you believe violates this policy, please report it in-app immediately, or contact us using the details in Section 10.</p>
-</section>
+    <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
 
-<section id="prohibited">
-<div class="sec-head">
-<div class="icon-box">6</div>
-<h2>Prohibited conduct</h2>
-</div>
-<p>In addition to the zero-tolerance policy above, when using the App you must not:</p>
-<ul>
-<li>Submit or share content that infringes copyright, trademark, or other intellectual property rights;</li>
-<li>Harass, threaten, bully, or abuse other users;</li>
-<li>Submit, upload, or share illegal content, or use the App for any unlawful purpose;</li>
-<li>Send spam, unsolicited advertising, or engage in other manipulative or deceptive practices;</li>
-<li>Attempt to break, disrupt, reverse-engineer, or otherwise abuse the App, its infrastructure, or its security measures.</li>
-</ul>
-</section>
-
-<section id="ip">
-<div class="sec-head">
-<div class="icon-box">7</div>
-<h2>Intellectual property</h2>
-</div>
-<p>Except for User Content, the App and all associated content, features, functionality, branding, logos, and trademarks are owned by WTG Ltd or its licensors, and are protected by copyright, trademark, and other intellectual property laws. You may not copy, modify, distribute, or create derivative works from the App or its branding without our prior written permission.</p>
-</section>
-
-<section id="disclaimers">
-<div class="sec-head">
-<div class="icon-box">8</div>
-<h2>Disclaimers &amp; limitation of liability</h2>
-</div>
-<p>The App is provided <strong>"as is"</strong> and <strong>"as available"</strong>, without warranties of any kind, whether express or implied, including (to the fullest extent permitted by law) warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not guarantee that the App will be uninterrupted, error-free, or that any User Content is accurate.</p>
-<p>To the fullest extent permitted by law, WTG Ltd shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of data, arising from or related to your use of the App. Nothing in these Terms excludes or limits liability that cannot be excluded or limited under applicable law.</p>
-</section>
-
-<div class="quote-block">
-<p style="margin:0;">These Terms are governed by the laws of <strong>England and Wales</strong>, and any disputes arising from them will be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
-</div>
-
-<section id="changes">
-<div class="sec-head">
-<div class="icon-box">9</div>
-<h2>Changes to these terms</h2>
-</div>
-<p>We may update these Terms from time to time. We will post the revised version with an updated "Last updated" date and, for material changes, notify you in the App. Continuing to use the App after changes take effect means you accept the updated Terms.</p>
-</section>
-
-<section id="contact">
-<div class="sec-head">
-<div class="icon-box">10</div>
-<h2>Contact</h2>
-</div>
-<div class="contact-card">
-<p style="margin:0;">Questions about these Terms, or want to report something? Use the <strong>Feedback</strong> screen inside the App, or reach us directly:</p>
-<a class="contact-btn" href="mailto:hello@whatsthatgame.info"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z" stroke="none"/><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><path d="m3.5 6 8.5 7 8.5-7"/></svg> hello@whatsthatgame.info</a>
-<p style="margin:0;">WTG Ltd</p>
-</div>
-</section>
-
-</article>
-</main>
-
-<!-- FOOTER -->
-<footer>
-<div class="footer-inner">
-<a href="/" class="footer-brand">What's That Game?</a>
-<p class="footer-tag">Solving the world's most annoying question, one game night at a time.</p>
-<div class="footer-links">
-<a href="mailto:hello@whatsthatgame.info">Contact</a>
-<a href="/business">Business Portal</a>
-<a href="/privacy">Privacy Policy</a>
-<a href="/terms" class="current">Terms of Use</a>
-</div>
-</div>
-<div class="footer-bottom">
-<p>&copy; 2026 What's That Game? All rights reserved.</p>
-</div>
-</footer>
-
-<script>
-    var menuToggle = document.getElementById('menu-toggle');
-    var mobileMenu = document.getElementById('mobile-menu');
-
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function () {
-            var isOpen = mobileMenu.classList.contains('open');
-            mobileMenu.classList.toggle('open');
-            menuToggle.setAttribute('aria-expanded', String(!isOpen));
-            menuToggle.innerHTML = isOpen ? '&#9776;' : '&#10005;';
+      if (menuToggle) {
+        menuToggle.addEventListener("click", () => {
+          const isOpening = !mobileMenu.classList.contains("menu-open");
+          mobileMenu.classList.toggle("menu-open");
+          menuToggle.classList.toggle("menu-toggle-open", isOpening);
+          menuToggle.setAttribute("aria-expanded", String(isOpening));
         });
 
-        mobileMenu.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', function () {
-                mobileMenu.classList.remove('open');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                menuToggle.innerHTML = '&#9776;';
-            });
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("menu-open");
+            menuToggle.classList.remove("menu-toggle-open");
+            menuToggle.setAttribute("aria-expanded", "false");
+          });
         });
-    }
+      }
 
-    var tocToggle = document.getElementById('toc-toggle');
-    var tocContent = document.getElementById('toc-content');
-    var tocChevron = document.getElementById('toc-chevron');
+      const tocToggle = document.getElementById("toc-toggle");
+      const tocContent = document.getElementById("toc-content");
+      const tocChevron = document.getElementById("toc-chevron");
 
-    if (tocToggle) {
-        tocToggle.addEventListener('click', function () {
-            tocContent.classList.toggle('hidden');
-            tocChevron.classList.toggle('open');
+      if (tocToggle) {
+        tocToggle.addEventListener("click", () => {
+          const isOpening = !tocContent.classList.contains("toc-open");
+          tocContent.classList.toggle("toc-open");
+          tocChevron.style.transform = isOpening
+            ? "rotate(180deg)"
+            : "rotate(0deg)";
         });
-    }
+      }
 
-    document.querySelectorAll('#toc-content a').forEach(function (anchor) {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            var target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                if (window.innerWidth < 768) {
-                    tocContent.classList.add('hidden');
-                    tocChevron.classList.remove('open');
-                }
-                var offset = target.getBoundingClientRect().top + window.pageYOffset - 80;
-                window.scrollTo({ top: offset, behavior: 'smooth' });
+      document.querySelectorAll("#toc-content a").forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            if (window.innerWidth < 768) {
+              tocContent.classList.remove("toc-open");
+              tocChevron.style.transform = "rotate(0deg)";
             }
+            const offset =
+              target.getBoundingClientRect().top + window.pageYOffset - 80;
+            window.scrollTo({ top: offset, behavior: "smooth" });
+          }
         });
-    });
-</script>
-
-</body>
+      });
+    </script>
+  </body>
 </html>
