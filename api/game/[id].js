@@ -210,11 +210,29 @@ function gameHtml(game, shareUrl) {
 <div class="flex flex-wrap items-center justify-center gap-2">${metaChips}</div>
 ${description ? `<p class="text-on-surface-variant font-body text-sm">${description}</p>` : ''}
 ${adultWarning}
-<a href="${shareUrl}" class="mt-2 w-full bg-primary text-on-primary font-button py-4 rounded-full tactile-border active-press transition-all flex items-center justify-center gap-2">
+<a href="${APP_STORE_URL}" id="open-in-app-btn" data-scheme-url="wtg://game/${encodeURIComponent(game.id)}" target="_blank" rel="noopener" class="mt-2 w-full bg-primary text-on-primary font-button py-4 rounded-full tactile-border active-press transition-all flex items-center justify-center gap-2">
 Open in App
 <span class="material-symbols-outlined">arrow_forward</span>
 </a>
 ${appStoreBadge()}
+<script>
+(function () {
+  var btn = document.getElementById('open-in-app-btn');
+  if (!btn) return;
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var schemeUrl = btn.dataset.schemeUrl;
+    var fallbackUrl = btn.href;
+    var start = Date.now();
+    window.location.href = schemeUrl;
+    setTimeout(function () {
+      if (!document.hidden && Date.now() - start < 2000) {
+        window.location.href = fallbackUrl;
+      }
+    }, 1200);
+  });
+})();
+</script>
 </div>`,
   });
 }
