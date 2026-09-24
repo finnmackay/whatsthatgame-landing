@@ -1,5 +1,15 @@
+
 {
   "outputDirectory": ".",
   "buildCommand": null,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/game/:id", "destination": "/api/game/:id" }
+  ],
+  "headers": [
+    {
+      "source": "/.well-known/apple-app-site-association",
+      "headers": [{ "key": "Content-Type", "value": "application/json" }]
+    }
+  ]
 }
