@@ -5,8 +5,8 @@ const API_BASE = "https://api.whatsthatgame.co.uk";
 const SITE_URL = "https://whatsthatgame.co.uk";
 const APP_STORE_URL =
   "https://apps.apple.com/us/app/whats-that-game/id6781044898?ppid=01c09469-36d8-4b2b-8d5a-d7a070db92ed";
-// Not live yet — Android visitors get a disabled "coming soon" badge until this is set.
-const PLAY_STORE_URL = "";
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.maxswaine.whatsthatgame";
 const DEFAULT_IMAGE = `${SITE_URL}/assets/wtg-logo.png`;
 
 // Mirrors gameTypeIconConfigs in whats-that-game-app (src/types/game.ts) — same
@@ -151,13 +151,10 @@ const GOOGLE_ICON = `<svg class="inline-block w-[1.2em] h-[1.2em] shrink-0" view
 
 // Secondary-weight badge (light border, no tactile shadow) so it visibly recedes
 // behind the primary "Open in App" button instead of competing with it.
-function storeBadgeEl({ href, icon, label, disabled, compact }) {
+function storeBadgeEl({ href, icon, label, compact }) {
   const widthClass = compact ? "flex-1" : "w-full";
   const paddingClass = compact ? "px-3" : "px-6";
   const base = `${widthClass} border-2 border-outline-variant rounded-full py-4 ${paddingClass} flex items-center justify-center gap-2 font-bold transition-all whitespace-nowrap`;
-  if (disabled) {
-    return `<div aria-disabled="true" class="${base} bg-surface-container-low text-on-surface-variant opacity-70">${icon}${label}</div>`;
-  }
   return `<a href="${href}" target="_blank" rel="noopener" class="${base} bg-white text-on-surface hover:bg-surface-container-low active:scale-[0.98]">${icon}${label}</a>`;
 }
 
@@ -171,14 +168,6 @@ function appStoreBadge(compact) {
 }
 
 function playStoreBadge(compact) {
-  if (!PLAY_STORE_URL) {
-    return storeBadgeEl({
-      icon: GOOGLE_ICON,
-      label: compact ? "Coming Soon" : "Coming Soon to Android",
-      disabled: true,
-      compact,
-    });
-  }
   return storeBadgeEl({
     href: PLAY_STORE_URL,
     icon: GOOGLE_ICON,
