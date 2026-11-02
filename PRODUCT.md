@@ -28,7 +28,7 @@ Most game apps ship a fixed deck someone wrote once. This one is community-submi
 - Mobile app: live on both the App Store and Google Play as of 2026-10-13 — this is a real-time launch-status claim on the homepage, not a fixed fact; check `index.html`'s hero badge before reusing it elsewhere, as it will go stale.
 - Mailing list signup (consumer) and inquiry form (business) are the two live conversion points on the site today.
 - Auth flow: password reset (`reset-password.html`) is a standalone, security-sensitive surface reached via emailed token link, deliberately isolated from the rest of the site's chrome (no nav/footer) and its motion is one-shot only (no perpetual/looping animation) since it's a trust-sensitive flow.
-- Backend: a Railway-hosted API (`whats-that-game-backend-production.up.railway.app`) handles auth/password-reset; a separate API (`api.whatsthatgame.co.uk`) serves mailing-list signup, contact form, and live game/category counts. Deployed as a static site via Vercel (`vercel.json`, `outputDirectory: "."`).
+- Backend: the Railway-hosted API (`api.whatsthatgame.co.uk`) handles auth/password-reset, mailing-list signup, contact form, and live game/category counts. Deployed as a static site via Vercel (`vercel.json`, `outputDirectory: "."`).
 
 ## Capabilities and Constraints
 
