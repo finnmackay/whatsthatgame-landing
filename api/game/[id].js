@@ -4,7 +4,7 @@
 const API_BASE = "https://api.whatsthatgame.co.uk";
 const SITE_URL = "https://whatsthatgame.co.uk";
 const APP_STORE_URL =
-  "https://apps.apple.com/us/app/whats-that-game/id6781044898?ppid=01c09469-36d8-4b2b-8d5a-d7a070db92ed";
+  "https://apps.apple.com/gb/app/whats-that-game/id6781044898";
 const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.maxswaine.whatsthatgame";
 const DEFAULT_IMAGE = `${SITE_URL}/assets/wtg-logo.png`;
